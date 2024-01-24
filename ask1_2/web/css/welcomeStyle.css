@@ -1,0 +1,36 @@
+#sign-in {
+    grid-area: sign-in;
+    margin-bottom: 13px;
+  }
+  
+  #sign-in-guest {
+    grid-area: sign-in-guest;
+  }
+  
+  #sign-up {
+    grid-area: sign-up;
+  }
+  
+  .sign-in-group {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "sign-in . . . sign-up" "sign-in-guest . . . .";
+  }
+  
+  @media (max-width: 725px) {
+    .sign-in-group {
+      grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+    }
+  }
+  
+  #sign-in .container-button {
+    width: 70px;
+  }
+  
+  #sign-up .container-button {
+    width: 70px;
+  }
+
+  
