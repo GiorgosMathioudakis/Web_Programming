@@ -2,12 +2,29 @@ body{
     background-color: #F9F4F3;
 }
 
+.redirect {
+    text-decoration: none;
+    color: #71b9e6;
+    font-weight: bold;
+    margin-left: 70%;
+    border: none;
+    font-size: 1em;
+}
+
+.redirect:hover {
+    color: #9b59b6;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
 #form{
     border: solid;
     padding-left: 10%;
     padding-right: 5%;
     border-radius: 10px;
     background-color: whitesmoke;
+    width: 550px;
 }
 
 p{
