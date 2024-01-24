@@ -1,0 +1,38 @@
+#sign-in {
+  grid-area: sign-in;
+}
+
+#go-back {
+  grid-area: go-back;
+}
+
+#button-group {
+  width: calc(100% / 2 - 20px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "sign-in . go-back";
+}
+
+.container {
+  max-width: 500px;
+}
+
+form {
+  align-items: center;
+}
+
+@media (max-width: 725px) {
+  .container {
+    max-width: 400px;
+    margin: 0 20px 0 20px;
+  }
+
+  #button-group {
+    width: 100%;
+  }
+}
+
+#sign-in .container-button,
+#go-back .container-button {
+  width: 50px;
+}
