@@ -4,23 +4,22 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
+import database.tables.EditPetKeepersTable;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.tables.*;
-import javax.servlet.http.HttpSession;
-import mainClasses.*;
+import mainClasses.PetKeeper;
 
 /**
  *
  * @author giorgosmathioudakis
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+public class PetOwnerPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");
+            out.println("<title>Servlet PetOwnerPage</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PetOwnerPage at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,34 +59,20 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        response.setContentType("text/html;charset=UTF-8");
+        EditPetKeepersTable temp = new EditPetKeepersTable();
+
         try {
-            PetOwner petowner = (new EditPetOwnersTable()).databaseToPetOwners(username, password);  //pet owner
-            PetKeeper petkeeper = (new EditPetKeepersTable()).databaseToPetKeepers(username, password);  //pet keeper
-            if (petkeeper == null && petowner == null) { // If credentials are incorrect.
-                System.out.println("wrong username/password");
-                response.sendRedirect("signIn.html");
-            }
-            else {
-                // Create session attribute
-                HttpSession session = request.getSession(true);
-                session.setAttribute("username", username);
-                session.setAttribute("password", password);
-                // Redirect to personal page.
-                if (petowner != null) { // If he is a petowner.
-                    System.out.println("userhtml redirection");
-                    session.setAttribute("petowner", petowner);
-                    response.sendRedirect("user.html");
-                } else { // If he is a petkeeper.
-                    System.out.println("petkeeper redirection");
-                    session.setAttribute("petkeeper", petkeeper);
-                    response.sendRedirect("petkeeper.html");
-                }
-            }
+            ArrayList<PetKeeper> petKeepers = temp.getAvailableKeepers("all"); // Call your method
+            Gson gson = new Gson();
+            String json = gson.toJson(petKeepers);
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         } catch (Exception e) {
-            System.out.println(e);
-            response.setStatus(400);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("Error fetching pet keepers");
         }
     }
 

@@ -20,6 +20,14 @@
         <servlet-name>Registers</servlet-name>
         <servlet-class>servlets.Registers</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetKeepers</servlet-name>
+        <servlet-class>servlets.GetKeepers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PetOwnerPage</servlet-name>
+        <servlet-class>servlets.PetOwnerPage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetKeeper</servlet-name>
         <url-pattern>/GetKeeper</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>Registers</servlet-name>
         <url-pattern>/Registers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetKeepers</servlet-name>
+        <url-pattern>/GetKeepers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PetOwnerPage</servlet-name>
+        <url-pattern>/PetOwnerPage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
