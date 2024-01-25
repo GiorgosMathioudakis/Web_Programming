@@ -9,9 +9,11 @@ import com.google.gson.Gson;
 import mainClasses.PetOwner;
 import database.DB_Connection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -120,6 +122,67 @@ public class EditPetOwnersTable {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public void deletePetOwner(String ownerId) throws SQLException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DB_Connection.getConnection();
+            String sqlDeletePets = "DELETE FROM pets WHERE owner_id = ?";
+            pstmt = con.prepareStatement(sqlDeletePets);
+            pstmt.setString(1, ownerId);
+            pstmt.executeUpdate();
+
+            String sqlDeleteKeeper = "DELETE FROM petowners WHERE owner_id = ?";
+            pstmt = con.prepareStatement(sqlDeleteKeeper);
+            pstmt.setString(1, ownerId);
+            pstmt.executeUpdate();
+
+            System.out.println("Pet owner and all related data deleted successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle SQL exceptions
+        } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public ArrayList<PetOwner> getAllPetOwners() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<PetOwner> owners = new ArrayList<>();
+
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM petowners");
+            Gson gson = new Gson();
+            System.out.println("IM INSIDE THE ALL");
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                PetOwner owner = gson.fromJson(json, PetOwner.class);
+                owners.add(owner);
+            }
+
+            return owners;
+        } catch (SQLException e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            return null;
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 
 

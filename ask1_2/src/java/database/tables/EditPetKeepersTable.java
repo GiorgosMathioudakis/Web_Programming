@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import mainClasses.PetKeeper;
 import database.DB_Connection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -121,7 +122,37 @@ public class EditPetKeepersTable {
         }
         return null;
     }
-    
+
+    public ArrayList<PetKeeper> getAllPetKeepers() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<PetKeeper> keepers = new ArrayList<>();
+
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM petKeepers");
+            Gson gson = new Gson();
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                PetKeeper keeper = gson.fromJson(json, PetKeeper.class);
+                keepers.add(keeper);
+            }
+
+            return keepers;
+        } catch (SQLException e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            return null;
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
 
     
      public ArrayList<PetKeeper> getAvailableKeepers(String type) throws SQLException, ClassNotFoundException {
@@ -199,6 +230,52 @@ public class EditPetKeepersTable {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public void deletePetKeeper(String keeperId) throws SQLException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DB_Connection.getConnection();
+
+            // Step 1: Delete Reviews Linked to the Pet Keeper
+            String sqlDeleteReviews = "DELETE FROM reviews WHERE keeper_id = ?";
+            pstmt = con.prepareStatement(sqlDeleteReviews);
+            pstmt.setString(1, keeperId);
+            pstmt.executeUpdate();
+
+            // Step 2: Delete Messages Linked to Bookings by the Pet Keeper
+            String sqlDeleteMessages = "DELETE messages FROM messages JOIN bookings ON messages.booking_id = bookings.booking_id WHERE bookings.keeper_id = ?";
+            pstmt = con.prepareStatement(sqlDeleteMessages);
+            pstmt.setString(1, keeperId);
+            pstmt.executeUpdate();
+
+            // Step 3: Delete Bookings Made by the Pet Keeper
+            String sqlDeleteBookings = "DELETE FROM bookings WHERE keeper_id = ?";
+            pstmt = con.prepareStatement(sqlDeleteBookings);
+            pstmt.setString(1, keeperId);
+            pstmt.executeUpdate();
+
+            // Step 4: Delete the Pet Keeper
+            String sqlDeleteKeeper = "DELETE FROM petkeepers WHERE keeper_id = ?";
+            pstmt = con.prepareStatement(sqlDeleteKeeper);
+            pstmt.setString(1, keeperId);
+            pstmt.executeUpdate();
+
+
+            System.out.println("Pet keeper and all related data deleted successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle SQL exceptions
+        } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 
 

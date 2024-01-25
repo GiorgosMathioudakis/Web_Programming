@@ -1,0 +1,130 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 24 Ιαν 2024, 5:09:49 μ.μ.
+    Author     : lympe
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  height: 100%;
+  margin:0%
+}
+body {
+  max-height: 100%;
+  margin:0%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: linear-gradient(130deg, #71b7e6, #9b59b6); */
+  background-image: url(../img/background.jpg.avif);
+  background-repeat: repeat;
+}
+
+/* || Typography */
+
+#container-title {
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 50px;
+}
+#container-title1 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+#container-title2 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* || Containers */
+
+#container {
+  max-width: 100%;
+  background-color: #fff;
+  overflow-x: auto;
+ /*padding: 25px 30px;*/
+  border-radius: 5px;
+  
+  justify-content: center;  /* Center horizontally */
+  background: rgba(255, 255, 255, 0.3);
+  padding: 3em;
+  z-index: 1;
+  border-radius: 3em;
+  backdrop-filter: blur(27px);
+  border: solid 2px transparent;
+  background-clip: padding-box;
+  box-shadow: 6px 6px 19px 1px;
+  font-weight: 500;
+}
+
+#info table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures that border lines are adjacent */
+}
+
+/* Style for table cells */
+#info table td, #info table th {
+    border: 1px solid #ddd; /* Adds a border to each cell */
+    padding: 8px; /* Adds some padding inside each cell */
+}
+
+/* Style for table headers (optional) */
+#info table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2; /* Adds a background color to header cells */
+    color: black; /* Text color for header cells */
+}
+
+#infok table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures that border lines are adjacent */
+}
+
+/* Style for table cells */
+#infok table td, #infok table th {
+    border: 1px solid #ddd; /* Adds a border to each cell */
+    padding: 8px; /* Adds some padding inside each cell */
+}
+
+/* Style for table headers (optional) */
+#infok table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2; /* Adds a background color to header cells */
+    color: black; /* Text color for header cells */
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+  margin-right: 15px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #004c80;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #bbcf92;
+  border-radius: 20px;
+  border: 3px solid #bbcf92;
+}
+
