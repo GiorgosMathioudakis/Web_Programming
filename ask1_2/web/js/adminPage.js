@@ -108,7 +108,7 @@ function deletePetKeeper(id) {
 }
 
 function deletePetOwner(id) {
-    console.log("Deleting pet keeper with ID:", id);
+    console.log("Deleting pet owner with ID:", id);
     console.log(id);
     var isConfirmed = confirm("Are you sure you want to delete this pet owner?");
     
@@ -121,13 +121,13 @@ function deletePetOwner(id) {
         xhr.onload = function () {
         
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var row = document.querySelector("#info1 tr[data-id='" + id + "']");
-            console.log("inside the deletepetowner")
+            var row = document.querySelector("#infok tr[data-id='" + id + "']");
+            console.log("inside the deletepetowner"+id);
                 if (row) {
                     row.remove();
                 }
         } else if (xhr.status !== 200) {
-            $("#info1").html("There are no available PetKeepers or PetOwners");
+            $("#infok").html("There are no available PetKeepers or PetOwners");
         }
         
     };

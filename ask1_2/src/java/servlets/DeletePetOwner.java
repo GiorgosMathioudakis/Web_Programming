@@ -59,7 +59,7 @@ public class DeletePetOwner extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         EditPetOwnersTable temp = new EditPetOwnersTable();
-        System.out.println(id);
+        System.out.println("HELLO");
         try {
             if (id != null && !id.isEmpty()) {
                 temp.deletePetOwner(id);
@@ -71,6 +71,7 @@ public class DeletePetOwner extends HttpServlet {
                 // Handle the case where 'id' is not provided or is empty
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().write("Error: No ID provided");
+                System.out.println("INSIDE THE DELETE SERVLET OWNER ");
                 response.setStatus(500);
             }
         } catch (SQLException e) {

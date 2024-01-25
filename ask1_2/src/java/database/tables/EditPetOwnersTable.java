@@ -130,19 +130,29 @@ public class EditPetOwnersTable {
 
         try {
             con = DB_Connection.getConnection();
+
+            // Step 1: Delete bookings associated with the owner's pets
+            String sqlDeleteBookings = "DELETE FROM bookings WHERE pet_id IN (SELECT pet_id FROM pets WHERE owner_id = ?)";
+            pstmt = con.prepareStatement(sqlDeleteBookings);
+            pstmt.setString(1, ownerId);
+            pstmt.executeUpdate();
+
+            // Step 2: Now, delete the pets
             String sqlDeletePets = "DELETE FROM pets WHERE owner_id = ?";
             pstmt = con.prepareStatement(sqlDeletePets);
             pstmt.setString(1, ownerId);
             pstmt.executeUpdate();
 
-            String sqlDeleteKeeper = "DELETE FROM petowners WHERE owner_id = ?";
-            pstmt = con.prepareStatement(sqlDeleteKeeper);
+            // Step 3: Finally, delete the pet owner
+            String sqlDeleteOwner = "DELETE FROM petowners WHERE owner_id = ?";
+            pstmt = con.prepareStatement(sqlDeleteOwner);
             pstmt.setString(1, ownerId);
             pstmt.executeUpdate();
 
             System.out.println("Pet owner and all related data deleted successfully.");
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("PROBLEM WITH DELETE OWNER");
             // Handle SQL exceptions
         } finally {
             if (pstmt != null) {
@@ -153,6 +163,7 @@ public class EditPetOwnersTable {
             }
         }
     }
+
 
     public ArrayList<PetOwner> getAllPetOwners() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
