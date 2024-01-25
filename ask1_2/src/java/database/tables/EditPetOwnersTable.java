@@ -66,7 +66,7 @@ public class EditPetOwnersTable {
             PetOwner user = gson.fromJson(json, PetOwner.class);
             return user;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Exception in databoseToPet where username: " + username + " and password: " + password + "! ");
             System.err.println(e.getMessage());
         }
         return null;

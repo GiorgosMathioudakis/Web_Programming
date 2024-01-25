@@ -397,7 +397,7 @@ function RegisterPost(){
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
         if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById('postmessage').innerText = "Succesful Registration\n" + jsonData;
+            document.getElementById('postmessage').innerText = "Succesful Registration\n";
             
 //            $("#ajaxContent").html("Successful Login");
         } else if (xhr.status !== 200) {

@@ -71,21 +71,24 @@ public class EditPetKeepersTable {
     }
     
     public PetKeeper databaseToPetKeepers(String username, String password) throws SQLException, ClassNotFoundException{
-         Connection con = DB_Connection.getConnection();
+        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM petkeepers WHERE username = '" + username + "' AND password='"+password+"'");
+            rs = stmt.executeQuery("SELECT * FROM petkeepers WHERE username = '" + username + "' AND password='" + password + "'");
             rs.next();
-            String json=DB_Connection.getResultsToJSON(rs);
+            String json = DB_Connection.getResultsToJSON(rs);
             Gson gson = new Gson();
             PetKeeper user = gson.fromJson(json, PetKeeper.class);
+            System.out.println(user);
+            con.close();
             return user;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Exception in databaseToPetKeepers where username: " + username + " and password: " + password + "! ");
             System.err.println(e.getMessage());
         }
+        con.close();
         return null;
     }
 

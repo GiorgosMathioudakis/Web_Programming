@@ -21,6 +21,7 @@
         <servlet-class>servlets.Registers</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>AdminPageKeepers</servlet-name>
         <servlet-class>servlets.AdminPageKeepers</servlet-class>
     </servlet>
@@ -35,6 +36,14 @@
     <servlet>
         <servlet-name>DeletePetOwner</servlet-name>
         <servlet-class>servlets.DeletePetOwner</servlet-class>
+=======
+        <servlet-name>GetKeepers</servlet-name>
+        <servlet-class>servlets.GetKeepers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PetOwnerPage</servlet-name>
+        <servlet-class>servlets.PetOwnerPage</servlet-class>
+>>>>>>> 88eba0f5bb5a00407ec1827cf3fe495527131d43
     </servlet>
     <servlet-mapping>
         <servlet-name>GetKeeper</servlet-name>
@@ -57,6 +66,7 @@
         <url-pattern>/Registers</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>AdminPageKeepers</servlet-name>
         <url-pattern>/AdminPageKeepers</url-pattern>
     </servlet-mapping>
@@ -71,6 +81,14 @@
     <servlet-mapping>
         <servlet-name>DeletePetOwner</servlet-name>
         <url-pattern>/DeletePetOwner</url-pattern>
+=======
+        <servlet-name>GetKeepers</servlet-name>
+        <url-pattern>/GetKeepers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PetOwnerPage</servlet-name>
+        <url-pattern>/PetOwnerPage</url-pattern>
+>>>>>>> 88eba0f5bb5a00407ec1827cf3fe495527131d43
     </servlet-mapping>
     <session-config>
         <session-timeout>
