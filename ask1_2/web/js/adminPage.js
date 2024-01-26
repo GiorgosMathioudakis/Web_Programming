@@ -3,6 +3,83 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+
+function drawCharts(dataFromServer){
+    var data = google.visualization.arrayToDataTable([
+        ['Pet', 'Count'],
+        ['Cats', dataFromServer.cats],
+        ['Dogs', dataFromServer.dogs]
+    ]);
+
+    var options = {
+        title: 'Pets Count',
+        pieHole: 0.4, // Creates a donut chart
+        animation: {
+        startup: true,
+        duration: 1000,
+        easing: 'out',
+    },
+   
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+    
+}
+function drawCharts1(dataFromServer){
+    var data = google.visualization.arrayToDataTable([
+        ['Keepers Owners', 'Count'],
+        ['Owners', dataFromServer.owners],
+        ['Keepers', dataFromServer.keepers]
+    ]);
+
+    var options = {
+        title: 'PetKeepers PetOwners Count',
+        pieHole: 0.4, // Creates a donut chart
+        animation: {
+        startup: true,
+        duration: 1000,
+        easing: 'out',
+    },
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+    chart.draw(data, options);
+    
+}
+
+function drawChartsbar(dataFromServer){
+    var data = google.visualization.arrayToDataTable([
+        ['Profits', 'Count'],
+        ['Profits of The Keeper', dataFromServer.profitsOfTheKeeper],
+        ['Profits of The App', dataFromServer.appProfits]
+    ]);
+
+    var options = {
+                title: 'Profits Breakdown',
+                chartArea: {width: '50%'},
+                hAxis: {
+                    title: 'Total Profits',
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'Category'
+                }
+            };
+
+    var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
+    chart.draw(data, options);
+    
+}
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawCharts);
+google.charts.setOnLoadCallback(drawCharts1);
+google.charts.setOnLoadCallback(drawChartsbar);
+
+
+
+
 function displayDataKeeper(data) {
     var html = "<table>";
 
@@ -185,6 +262,85 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr1.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr1.send();
 });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Your script goes here
+    console.log("The HTML is fully loaded Pet Count");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        
+        if (xhr.readyState === 4 && xhr.status === 200) {
+              var data = JSON.parse(xhr.responseText);
+              drawCharts1(data);
+            
+            
+        } else if (xhr.status !== 200) {
+             $("#infost").html("There are no available PetKeepers");
+        }
+        
+    };
+    
+    
+    xhr.open('GET',"CountKeepersOwners");
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Your script goes here
+    console.log("The HTML is fully loaded Pet Count");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        
+        if (xhr.readyState === 4 && xhr.status === 200) {
+              var data = JSON.parse(xhr.responseText);
+              drawCharts(data);
+            
+            
+        } else if (xhr.status !== 200) {
+             $("#infost").html("There are no available PetKeepers");
+        }
+        
+    };
+    
+    
+    xhr.open('GET',"CountDogsCats");
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Your script goes here
+    console.log("The HTML is fully loaded PetOwnerrKeepers Count");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        
+        if (xhr.readyState === 4 && xhr.status === 200) {
+              var data = JSON.parse(xhr.responseText);
+              
+              drawChartsbar(data);
+            
+            
+        } else if (xhr.status !== 200) {
+             $("#infost").html("There are no available PetKeepers");
+        }
+        
+    };
+    
+    
+    xhr.open('GET',"GetAllPrice");
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+});
+
+
+
+
+
+
 
 
 

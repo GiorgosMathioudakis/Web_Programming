@@ -36,13 +36,25 @@
         <servlet-name>DeletePetOwner</servlet-name>
         <servlet-class>servlets.DeletePetOwner</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>GetKeepers</servlet-name>
         <servlet-class>servlets.GetKeepers</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PetOwnerPage</servlet-name>
         <servlet-class>servlets.PetOwnerPage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CountDogsCats</servlet-name>
+        <servlet-class>servlets.CountDogsCats</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CountKeepersOwners</servlet-name>
+        <servlet-class>servlets.CountKeepersOwners</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPrice</servlet-name>
+        <servlet-class>servlets.GetAllPrice</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetKeeper</servlet-name>
@@ -80,18 +92,27 @@
         <servlet-name>DeletePetOwner</servlet-name>
         <url-pattern>/DeletePetOwner</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>GetKeepers</servlet-name>
         <url-pattern>/GetKeepers</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PetOwnerPage</servlet-name>
         <url-pattern>/PetOwnerPage</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CountDogsCats</servlet-name>
+        <url-pattern>/CountDogsCats</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CountKeepersOwners</servlet-name>
+        <url-pattern>/CountKeepersOwners</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPrice</servlet-name>
+        <url-pattern>/GetAllPrice</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

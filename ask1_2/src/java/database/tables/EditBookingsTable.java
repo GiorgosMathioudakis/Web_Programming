@@ -123,4 +123,43 @@ public class EditBookingsTable {
             Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public double BookingGetPrice() throws ClassNotFoundException {
+        double totalPrice = 0;
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DB_Connection.getConnection();
+            stmt = con.createStatement();
+
+            String sumQuery = "SELECT SUM(price) AS total FROM bookings";
+            rs = stmt.executeQuery(sumQuery);
+
+            if (rs.next()) {
+                totalPrice = rs.getDouble("total");
+            }
+
+            System.out.println("# The total price of all bookings is: " + totalPrice);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return totalPrice;
+    }
 }
