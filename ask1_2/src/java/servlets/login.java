@@ -78,7 +78,7 @@ public class login extends HttpServlet {
                 if (petowner != null) { // If he is a petowner.
                     System.out.println("userhtml redirection");
                     session.setAttribute("petowner", petowner);
-                    response.sendRedirect("user.html");
+                    response.sendRedirect("petowner.html");
                 } else { // If he is a petkeeper.
                     System.out.println("petkeeper redirection");
                     session.setAttribute("petkeeper", petkeeper);

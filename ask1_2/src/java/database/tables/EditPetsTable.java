@@ -63,7 +63,7 @@ public class EditPetsTable {
     }
 
     
-    public Pet petOfOwner(String id) throws SQLException, ClassNotFoundException {
+    public Pet petOfOwner(int id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         Pet pet = new Pet();
@@ -93,6 +93,28 @@ public class EditPetsTable {
         try {
             rs = stmt.executeQuery("SELECT * FROM pets WHERE type= '" + type + "'");
            
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Pet pet = gson.fromJson(json, Pet.class);
+                pets.add(pet);
+            }
+            return pets;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<Pet> databaseToAllPets() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Pet> pets = new ArrayList<Pet>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM pets WHERE type=");
+
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();

@@ -143,7 +143,7 @@ public class EditBookingsTable {
         return null;
     }
 
-    public String getPetType(String owner_id) {
+    public String getPetType(int owner_id) {
         try {
             Pet pet = (new EditPetsTable()).petOfOwner(owner_id);
             return pet.getType();

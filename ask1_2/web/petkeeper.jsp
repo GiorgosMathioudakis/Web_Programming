@@ -32,8 +32,7 @@
     }
 //    Make the bookings List
     ArrayList<Booking> bookings = (ArrayList<Booking>) (new EditBookingsTable()).databaseToBookingArraylist(keeper.getKeeper_id());
-    //    Set<SimpleUser> petowners = (Set<SimpleUser>) (new EditRandevouzTable()).databaseToPatients(doctor.getDoctor_id());
-
+//  Make the petowners set
     Set<PetOwner> petowners = (Set<PetOwner>) (new EditBookingsTable()).databaseToPetOwners(keeper.getKeeper_id());
     
 %>

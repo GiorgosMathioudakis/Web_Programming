@@ -39,30 +39,26 @@ $(".doc-edit").on("click", function () {
   popup.addClass("centered");
   popup.addClass("bigger");
 
-  popup.append("<h5 style='font-size: 16px'>Edit Randevouz<h5>");
+  popup.append("<h5 style='font-size: 16px'>Edit Status<h5>");
 
   popup.append(
-    "<group id='edit-randevouz'>" +
-      "<input  class='seperate' type='datetime-local' id='birthdaytime' name='birthdaytime' required>" +
-      "<input class='seperate' id='price' name='price' type='number' min='10' max='80' required/>" +
-      "<textarea class='seperate' id='doctor-info-area' name='doctor-info-area' rows='2' cols='20' required> </textarea>" +
+    "<group id='edit-booking'>" +
       "<select class='seperate' name='states' id='states'>" +
-      "<option value='free'>Free</option>" +
-      "<option value='cancelled'>Cancelled</option>" +
-      "<option value='done'>Done</option>" +
+      "<option value='requested'>Requested</option>" +
+      "<option value='accepted'>Accepted</option>" +
+      "<option value='rejected'>Rejected</option>" +
+      "<option value='finished'>Finished</option>" +
       "</select>" +
       "</group>"
   );
 
   popup.append(
-    '<button id="confirm-randevou" class="pop-up-btn container-button">Confirm</button>'
+    '<button id="confirm-booking" class="pop-up-btn container-button">Confirm</button>'
   );
   popup.append(
     '<button id="cancel" class="pop-up-btn container-button">Cancel</button>'
   );
-  popup.append(
-    '<button id="del-randevou" class="pop-up-btn container-button" form="del-randevou"><i class="fas fa-trash"></i></button>'
-  );
+  
 
   $("#confirm-randevou").on("click", function () {
     var datetime = $("#birthdaytime").val();
