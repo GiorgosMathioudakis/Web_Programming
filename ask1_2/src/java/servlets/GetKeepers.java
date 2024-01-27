@@ -51,9 +51,8 @@ public class GetKeepers extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
         try {
-            ArrayList<PetKeeper> petkeepers = (new EditPetKeepersTable()).getAvailableKeepers("all");
+            ArrayList<PetKeeper> petkeepers = (new EditPetKeepersTable()).getAllPetKeepers();
             Gson gson = new Gson();
             response.setStatus(200);
             String tests_json = gson.toJson(petkeepers);

@@ -3,18 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/database/tables/EditReviewsTable.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/signUp.html</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/mainClasses/PetOwner.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/mainClasses/PetKeeper.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/mainClasses/Review.java</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/js/functions.js</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/css/basicStyle.css</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/css/guest.css</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/servlets/GetPetKeeper.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/js/guest.js</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/petkeeper.html</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/database/tables/EditPetKeepersTable.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/servlets/PetOwnerPage.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/index.html</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/petowner.html</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/signIn.html</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/js/petowner.js</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/guest.html</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/servlets/GetKeepers.java</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/css/loginStyle.css</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/css/signUp.css</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/js/ajax.js</file>
-            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/index.html</file>
-            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/css/basicStyle.css</file>
-            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/user.html</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/css/welcomeStyle.css</file>
-            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/signIn.html</file>
-            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/guest.html</file>
-            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/signUp.html</file>
-            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/petkeeper.html</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/servlets/Registers.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/servlets/logout.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/js/map.js</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/servlets/login.java</file>
+            <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/database/tables/EditPetOwnersTable.java</file>
         </group>
     </open-files>
 </project-private>

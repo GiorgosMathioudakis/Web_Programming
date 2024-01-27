@@ -156,3 +156,6 @@ body::-webkit-scrollbar-thumb {
   border: 3px solid #bbcf92;
 }
 
+#logout{
+    margin-left: 90%;
+}
