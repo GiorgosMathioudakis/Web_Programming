@@ -13,7 +13,7 @@ function drawCharts(dataFromServer){
 
     var options = {
         title: 'Pets Count',
-        pieHole: 0.4, // Creates a donut chart
+        pieHole: 0.3, // Creates a donut chart
         animation: {
         startup: true,
         duration: 1000,
@@ -35,7 +35,7 @@ function drawCharts1(dataFromServer){
 
     var options = {
         title: 'PetKeepers PetOwners Count',
-        pieHole: 0.4, // Creates a donut chart
+        pieHole: 0.3, // Creates a donut chart
         animation: {
         startup: true,
         duration: 1000,

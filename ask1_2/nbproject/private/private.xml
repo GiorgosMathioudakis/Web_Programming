@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/database/tables/EditReviewsTable.java</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/signUp.html</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/mainClasses/PetOwner.java</file>
@@ -31,6 +32,14 @@
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/web/js/map.js</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/servlets/login.java</file>
             <file>file:/Users/giorgosmathioudakis/Desktop/Giorgos/hy359/HY359_Project/ask1_2/src/java/database/tables/EditPetOwnersTable.java</file>
+=======
+            <file>file:/C:/Users/lympe/Desktop/HY359/Project%20359/ClonedMathiou/HY359_Project/ask1_2/src/java/database/tables/EditPetOwnersTable.java</file>
+            <file>file:/C:/Users/lympe/Desktop/HY359/Project%20359/ClonedMathiou/HY359_Project/ask1_2/web/petowner.html</file>
+            <file>file:/C:/Users/lympe/Desktop/HY359/Project%20359/ClonedMathiou/HY359_Project/ask1_2/src/java/servlets/AddPet.java</file>
+            <file>file:/C:/Users/lympe/Desktop/HY359/Project%20359/ClonedMathiou/HY359_Project/ask1_2/src/java/database/tables/EditBookingsTable.java</file>
+            <file>file:/C:/Users/lympe/Desktop/HY359/Project%20359/ClonedMathiou/HY359_Project/ask1_2/web/js/petowner.js</file>
+            <file>file:/C:/Users/lympe/Desktop/HY359/Project%20359/ClonedMathiou/HY359_Project/ask1_2/src/java/database/tables/EditPetsTable.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

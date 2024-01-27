@@ -51,6 +51,59 @@ public class EditPetOwnersTable {
         String update="UPDATE petowners SET personalpage='"+personalpage+"' WHERE username = '"+username+"'";
         stmt.executeUpdate(update);
     }
+
+    public void updatePetOwnerAll(PetOwner owner) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DB_Connection.getConnection();
+
+            String update = "UPDATE petowners SET "
+                    //                    + "username = ?, "
+                    //                    + "email = ?, "
+                    + "password = ?, "
+                    + "firstname = ?, "
+                    + "lastname = ?, "
+                    + "birthdate = ?, "
+                    + "gender = ?, "
+                    + "country = ?, "
+                    + "city = ?, "
+                    + "address = ?, "
+                    + "personalpage = ?, "
+                    + "job = ?, "
+                    + "telephone = ? "
+                    + "WHERE owner_id = ?";
+            System.out.println("INSIDE THE SQL3");
+            pstmt = con.prepareStatement(update);
+
+//            pstmt.setString(1, owner.getUsername());
+//            pstmt.setString(2, owner.getEmail());
+            pstmt.setString(1, owner.getPassword());
+            pstmt.setString(2, owner.getFirstname());
+            pstmt.setString(3, owner.getLastname());
+            pstmt.setString(4, owner.getBirthdate()); // assuming birthdate is a LocalDate
+            pstmt.setString(5, owner.getGender());
+            pstmt.setString(6, owner.getCountry());
+            pstmt.setString(7, owner.getCity());
+            pstmt.setString(8, owner.getAddress());
+            pstmt.setString(9, owner.getPersonalpage());
+            pstmt.setString(10, owner.getJob());
+            pstmt.setString(11, owner.getTelephone());
+            pstmt.setInt(12, owner.getOwner_id()); // assuming owner_id is an int
+
+            pstmt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("PROBLEM IN SQL3");
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
    
     
     public PetOwner databaseToPetOwners(String username, String password) throws SQLException, ClassNotFoundException{
