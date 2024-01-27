@@ -12,8 +12,17 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mainClasses.Pet;
+import mainClasses.PetOwner;
 
 /**
  *
@@ -44,6 +53,156 @@ public class EditBookingsTable {
         }
         return null;
     }
+
+    public ArrayList<Booking> databaseToBookingArraylist(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Booking> bookings = new ArrayList<>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id= '" + id + "'");
+            while (rs.next()) {
+
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Booking doc = gson.fromJson(json, Booking.class);
+                bookings.add(doc);
+            }
+            con.close();
+            bookings.sort(
+                    new Comparator<Booking>() {
+                @Override
+                public int compare(Booking r1, Booking r2) {
+                    try {
+                        Date firstdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(r1.getFromDate().replace("T", " ") + ":00");
+                        Date seconddate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(r2.getFromDate().replace("T", " ") + ":00");
+
+                        return firstdate.compareTo(seconddate);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return 0;
+                }
+
+            });
+            return bookings;
+        } catch (Exception e) {
+            System.err.println("Exception in databaseToRandevouzArraylist doctor_id: " + id + "! ");
+            System.err.println(e.getMessage());
+        }
+        con.close();
+        return null;
+    }
+
+    public Set<PetOwner> databaseToPetOwners(int keeper_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Booking> bookings = new ArrayList<>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id=" + keeper_id + ";");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Booking doc = gson.fromJson(json, Booking.class);
+                bookings.add(doc);
+            }
+            con.close();
+            Set<PetOwner> owners = new HashSet<PetOwner>();
+
+            for (Booking booking : bookings) {
+                if (booking.getOwner_id() == 0) {
+                    continue;
+                }
+                owners.add((new EditPetOwnersTable()).databaseToPetOwners(booking.getOwner_id()));
+            }
+
+            Set<PetOwner> finishedSet = new HashSet<PetOwner>();
+            boolean sameUserFlag = false;
+            for (PetOwner owner : owners) {
+                for (PetOwner tmp : finishedSet) {
+                    if (owner.getUsername().contentEquals(tmp.getUsername())) {
+                        sameUserFlag = true;
+                        break;
+                    }
+                }
+                if (sameUserFlag == true) {
+                    sameUserFlag = false;
+                    continue;
+                }
+                finishedSet.add(owner);
+            }
+
+            return finishedSet;
+
+        } catch (Exception e) {
+            System.err.println("Exception in databaseToPatients where doctor_id: " + keeper_id + "! ");
+            System.err.println(e.getMessage());
+        }
+        con.close();
+        return null;
+    }
+
+    public String getPetType(String owner_id) {
+        try {
+            Pet pet = (new EditPetsTable()).petOfOwner(owner_id);
+            return pet.getType();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+//    public Set<PetOwner> databaseToPatients(int keeper_id) throws SQLException, ClassNotFoundException {
+//        Connection con = DB_Connection.getConnection();
+//        Statement stmt = con.createStatement();
+//        ArrayList<Booking> bookings = new ArrayList<>();
+//        ResultSet rs;
+//        try {
+//            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id=" + keeper_id + " AND status='finished';");
+//            while (rs.next()) {
+//                String json = DB_Connection.getResultsToJSON(rs);
+//                Gson gson = new Gson();
+//                Booking doc = gson.fromJson(json, Booking.class);
+//                bookings.add(doc);
+//            }
+//            con.close();
+//            Set<PetOwner> owners = new HashSet<PetOwner>();
+//
+//            for (Booking booking : bookings) {
+//                if (booking.getOwner_id() == 0) {
+//                    continue;
+//                }
+//                owners.add((new EditPetOwnersTable()).databaseToPetOwners(booking.getOwner_id()));
+//            }
+//
+//            Set<SimpleUser> finishedSet = new HashSet<SimpleUser>();
+//            boolean sameUserFlag = false;
+//            for (SimpleUser user : owners) {
+//                for (SimpleUser tmp : finishedSet) {
+//                    if (user.getUsername().contentEquals(tmp.getUsername())) {
+//                        sameUserFlag = true;
+//                        break;
+//                    }
+//                }
+//                if (sameUserFlag == true) {
+//                    sameUserFlag = false;
+//                    continue;
+//                }
+//                finishedSet.add(user);
+//            }
+//
+//            return finishedSet;
+//
+//        } catch (Exception e) {
+//            System.err.println("Exception in databaseToPatients where doctor_id: " + doctor_id + "! ");
+//            System.err.println(e.getMessage());
+//        }
+//        con.close();
+//        return null;
+//    }
 
     public Booking jsonToBooking(String json) {
         Gson gson = new Gson();

@@ -169,6 +169,14 @@ function validateForm() {
   
   // Add additional validation logic for other form fields here.
   
+  if(document.getElementById("username").value === "admin" ){
+      document.getElementById('usernameerr').innerHTML = "not acceptable username" ; 
+      return false;
+  }
+  if(document.getElementById("password").value === "admin12*" ){
+        document.getElementById('error-message').innerHTML = "not acceptable password" ; 
+        return false;
+  }
   return true;
 }
 

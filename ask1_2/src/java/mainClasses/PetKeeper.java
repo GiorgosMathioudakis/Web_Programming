@@ -21,6 +21,10 @@ public class PetKeeper {
     String catkeeper,dogkeeper;
     int catprice, dogprice;
 
+    public int getKeeper_id() {
+        return keeper_id;
+    }
+
     public String getProperty() {
         return property;
     }

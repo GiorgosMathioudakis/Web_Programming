@@ -72,6 +72,25 @@ public class EditPetOwnersTable {
         return null;
     }
 
+    public PetOwner databaseToPetOwners(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM petowners WHERE owner_id= '" + id + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            PetOwner user = gson.fromJson(json, PetOwner.class);
+            return user;
+        } catch (Exception e) {
+            System.err.println("Exception in databoseToPet where owner_id: " + id);
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     public String databaseToPetOwnersUsername(String username) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();

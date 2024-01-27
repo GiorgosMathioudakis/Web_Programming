@@ -82,7 +82,7 @@ public class login extends HttpServlet {
                 } else { // If he is a petkeeper.
                     System.out.println("petkeeper redirection");
                     session.setAttribute("petkeeper", petkeeper);
-                    response.sendRedirect("petkeeper.html");
+                    response.sendRedirect("petkeeper.jsp");
                 }
             }
         } catch (Exception e) {
