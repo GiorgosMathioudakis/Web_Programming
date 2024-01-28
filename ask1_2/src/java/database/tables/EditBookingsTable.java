@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -141,6 +142,41 @@ public class EditBookingsTable {
         }
         con.close();
         return null;
+    }
+
+    public List<Booking> databaseGetPetOwners(int owner_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        List<Booking> bookings = new ArrayList<>();
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE owner_id=" + owner_id + " AND status='finished';");
+            while (rs.next()) {
+                Booking booking = new Booking(); // Assuming Booking is a class that represents a booking
+                // Set properties of Booking object from ResultSet
+                booking.setBooking_id(rs.getInt("booking_id"));
+                booking.setOwner_id(rs.getInt("owner_id"));
+                booking.setPet_id(rs.getInt("pet_id"));
+                booking.setKeeper_id(rs.getInt("keeper_id"));
+                booking.setFromDate(rs.getString("fromdate"));
+                booking.setToDate(rs.getString("todate"));
+                booking.setStatus(rs.getString("status"));
+                booking.setPrice(rs.getInt("price"));
+                // Add to list
+                bookings.add(booking);
+            }
+        } catch (Exception e) {
+            System.err.println("Exception in databaseGetPetOwners where owner_id: " + owner_id + "! ");
+            System.err.println(e.getMessage());
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return bookings;
     }
 
     public String getPetType(int owner_id) {

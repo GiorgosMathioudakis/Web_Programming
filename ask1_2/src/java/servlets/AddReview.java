@@ -4,24 +4,22 @@
  */
 package servlets;
 
-import database.tables.EditBookingsTable;
+import database.tables.EditReviewsTable;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mainClasses.Booking;
+import mainClasses.Review;
 
 /**
  *
  * @author lympe
  */
-public class AddBooking extends HttpServlet {
+public class AddReview extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +38,10 @@ public class AddBooking extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddBooking</title>");
+            out.println("<title>Servlet AddReview</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddBooking at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddReview at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,40 +73,30 @@ public class AddBooking extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        EditBookingsTable book = new EditBookingsTable();
-        Booking temp = new Booking();
-        String owner_id = request.getParameter("owner_id");
-        String keeper_id = request.getParameter("keeper_id");
-        String pet_id = request.getParameter("pet_id");
-        String price = request.getParameter("price");
-        String todate = request.getParameter("todate");
-        String fromdate = request.getParameter("fromdate");
+        EditReviewsTable review = new EditReviewsTable();
+        Review temp = new Review();
+
+        String ownerid = request.getParameter("owner_id");
+        String keeperid = request.getParameter("keeper_id");
+        String desc = request.getParameter("reviewdesc");
+        String score = request.getParameter("score");
+
         try {
-            LocalDate fromDate = LocalDate.parse(fromdate);
-            LocalDate toDate = LocalDate.parse(todate);
-            long daysBetween = ChronoUnit.DAYS.between(fromDate, toDate);
+            int kid = Integer.parseInt(keeperid);
+            int oid = Integer.parseInt(ownerid);
 
-            int pricePerDay = Integer.parseInt(price);
-            int totalPrice = (int) daysBetween * pricePerDay;
-
-            System.out.println(fromdate + todate + pet_id);
-            int kid = Integer.parseInt(keeper_id);
-            int oid = Integer.parseInt(owner_id);
-            int pid = Integer.parseInt(pet_id);
-            temp.setFromDate(fromdate);
             temp.setKeeper_id(kid);
             temp.setOwner_id(oid);
-            temp.setPet_id(pid);
-            temp.setPrice(totalPrice);
-            temp.setToDate(todate);
-            temp.setStatus("requested");
-            response.setStatus(200);
+            temp.setReviewScore(score);
+            temp.setReviewText(desc);
 
-            book.createNewBooking(temp);
+            review.createNewReview(temp);
+            response.setStatus(200);
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Registers.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**

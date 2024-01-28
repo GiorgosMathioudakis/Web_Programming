@@ -88,8 +88,211 @@ body {
 .container {
   width: 150%;
   background-color: #fff;
-  margin-left: 4%;
+  margin-left: 7%;
   border-radius: 5px;
+}
+
+
+#Reviewdiv{
+    display :flex;
+    justify-content: center;
+}
+
+#rev{
+    display :flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+#reviewdesc{
+    width: 40%;
+    height: 30%;
+}
+/*ADD PET*/
+#add_Pet {
+    max-width: 600px; /* Increase the max-width */
+    margin: 20px auto;
+    padding: 30px; /* Increase padding */
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#container-title {
+    text-align: center;
+    font-size: 28px; /* Slightly larger font size */
+    color: #333;
+    margin-bottom: 30px; /* Increase spacing below the title */
+}
+
+/* Style for form inputs and textarea */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px; /* Slightly more padding */
+    margin: 12px 0; /* Increase spacing between inputs */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Style for buttons */
+.button, button.container-button {
+    
+    padding: 12px 20px; /* Slightly larger padding */
+    
+    
+    transition: all 0.3s ease;
+    background: #bbcf92;
+    backdrop-filter: blur(40px);
+    background-clip: padding-box;
+    z-index: 0;
+    border-radius: 3em;
+    border: none;
+    font-weight: 500;
+    color: #004c80;
+}
+
+.button:hover, button.container-button:hover {
+    transform: scale(1.2);
+    transform-origin: center;
+    background: #004c80;
+    color: #bbcf92;
+    cursor: pointer;
+}
+
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Make sure padding doesn't affect overall width */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+#bookingkeeper{
+    width: 50%;
+    height: 30%;
+}
+
+#booking {
+    max-width: 600px; /* Increase the max-width */
+    margin: 20px auto;
+    padding: 30px; /* Increase padding */
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none; /* Keeps the initial hidden state */
+}
+
+#container-title {
+    text-align: center;
+    font-size: 28px; /* Slightly larger font size */
+    color: #333;
+    margin-bottom: 30px; /* Increase spacing below the title */
+}
+
+#book input[type="date"], #book input[type="submit"] {
+    width: 100%;
+    padding: 12px; /* Slightly more padding */
+    margin: 12px 0; /* Increase spacing between inputs */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#book input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#book input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Labels styling */
+#book label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 16px;
+}
+
+
+/* Style for the reviews container */
+#Reviews {
+    max-width: 600px; /* Adjust width as needed */
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#container-title {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Style for form inputs, textarea and select */
+#reviewform input[type="submit"], #reviewform textarea, #reviewform select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#reviewform textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+#reviewform select {
+    display: block; /* Ensure select fills width */
+    cursor: pointer; /* Cursor style for select */
+}
+
+/* Style for form submit button */
+#reviewform input[type="submit"] {
+   padding: 12px 20px; /* Slightly larger padding */
+    
+    
+    transition: all 0.3s ease;
+    background: #bbcf92;
+    backdrop-filter: blur(40px);
+    background-clip: padding-box;
+    z-index: 0;
+    border-radius: 3em;
+    border: none;
+    font-weight: 500;
+    color: #004c80;
+}
+
+#reviewform input[type="submit"]:hover {
+   transform: scale(1.2);
+    transform-origin: center;
+    background: #004c80;
+    color: #bbcf92;
+    cursor: pointer;
+}
+
+/* Labels styling */
+#reviewform label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 16px;
 }
 
 .glass {
@@ -104,26 +307,7 @@ body {
   font-weight: 500;
 }
 
-.container-button {
-  transition: all 0.3s ease;
-  background: #bbcf92;
-  backdrop-filter: blur(40px);
-  background-clip: padding-box;
-  z-index: 0;
-  border-radius: 3em;
-  border: none;
-  padding: 5px;
-  font-weight: 500;
-  color: #004c80;
-}
 
-.container-button:hover {
-  transform: scale(1.2);
-  transform-origin: center;
-  background: #004c80;
-  color: #bbcf92;
-  cursor: pointer;
-}
 
 /* Input Boxes */
 .container .input-box {
@@ -164,6 +348,8 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
   border: 3px solid #bbcf92;
 }
+
+
 
 /* || Media Queries */
 

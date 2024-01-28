@@ -88,6 +88,14 @@
         <servlet-name>AddBooking</servlet-name>
         <servlet-class>servlets.AddBooking</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReadyReview</servlet-name>
+        <servlet-class>servlets.ReadyReview</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddReview</servlet-name>
+        <servlet-class>servlets.AddReview</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetKeeper</servlet-name>
         <url-pattern>/GetKeeper</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>AddBooking</servlet-name>
         <url-pattern>/AddBooking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadyReview</servlet-name>
+        <url-pattern>/ReadyReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddReview</servlet-name>
+        <url-pattern>/AddReview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
