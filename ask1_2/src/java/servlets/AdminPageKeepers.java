@@ -61,11 +61,9 @@ public class AdminPageKeepers extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         EditPetKeepersTable temp = new EditPetKeepersTable();
-        System.out.println("eee");
 
         try {
             ArrayList<PetKeeper> petKeepers = temp.getAllPetKeepers(); // Call your method
-            System.out.println("eee");
             Gson gson = new Gson();
             String json = gson.toJson(petKeepers);
 

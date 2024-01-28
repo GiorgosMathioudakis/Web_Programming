@@ -9,8 +9,24 @@
         <servlet-class>servlets.InitDB</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AvailablePetKeepers</servlet-name>
+        <servlet-class>servlets.AvailablePetKeepers</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>DeleteDB</servlet-name>
         <servlet-class>servlets.DeleteDB</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPet</servlet-name>
+        <servlet-class>servlets.GetPet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetIDPet</servlet-name>
+        <servlet-class>servlets.GetIDPet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBooking</servlet-name>
+        <servlet-class>servlets.AddBooking</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
@@ -72,21 +88,17 @@
         <servlet-name>petkeeper</servlet-name>
         <servlet-class>servlets.petkeeper</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AvailablePetKeepers</servlet-name>
-        <servlet-class>servlets.AvailablePetKeepers</servlet-class>
+    <servlet>                                       
+        <servlet-name>ownerMessages</servlet-name>
+        <servlet-class>servlets.ownerMessages</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetPet</servlet-name>
-        <servlet-class>servlets.GetPet</servlet-class>
+        <servlet-name>keeperMessages</servlet-name>
+        <servlet-class>servlets.keeperMessages</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetIDPet</servlet-name>
-        <servlet-class>servlets.GetIDPet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddBooking</servlet-name>
-        <servlet-class>servlets.AddBooking</servlet-class>
+        <servlet-name>chatGPT</servlet-name>
+        <servlet-class>servlets.chatGPT</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ReadyReview</servlet-name>
@@ -104,6 +116,23 @@
         <servlet-name>InitDB</servlet-name>
         <url-pattern>/InitDB</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PetOwnerSession</servlet-name>
+        <url-pattern>/PetOwnerSession</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePetOwner</servlet-name>
+        <url-pattern>/UpdatePetOwner</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPet</servlet-name>
+        <url-pattern>/AddPet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AvailablePetKeepers</servlet-name>
+        <url-pattern>/AvailablePetKeepers</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>DeleteDB</servlet-name>
         <url-pattern>/DeleteDB</url-pattern>
@@ -153,24 +182,12 @@
         <url-pattern>/GetAllPrice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PetOwnerSession</servlet-name>
-        <url-pattern>/PetOwnerSession</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdatePetOwner</servlet-name>
-        <url-pattern>/UpdatePetOwner</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddPet</servlet-name>
-        <url-pattern>/AddPet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>petkeeper</servlet-name>
         <url-pattern>/petkeeper</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AvailablePetKeepers</servlet-name>
-        <url-pattern>/AvailablePetKeepers</url-pattern>
+        <servlet-name>ownerMessages</servlet-name>
+        <url-pattern>/ownerMessages</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetPet</servlet-name>
@@ -185,12 +202,21 @@
         <url-pattern>/AddBooking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>ReadyReview</servlet-name>
         <url-pattern>/ReadyReview</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddReview</servlet-name>
         <url-pattern>/AddReview</url-pattern>
+=======
+        <servlet-name>keeperMessages</servlet-name>
+        <url-pattern>/keeperMessages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>chatGPT</servlet-name>
+        <url-pattern>/chatGPT</url-pattern>
+>>>>>>> 196d17e62fbe22d2af75302f7426840bd146283c
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

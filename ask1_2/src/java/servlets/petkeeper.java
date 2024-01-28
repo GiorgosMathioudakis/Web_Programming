@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import database.tables.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -53,6 +56,31 @@ public class petkeeper extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String state = request.getParameter("state");
+        String booking_id = request.getParameter("id");
+
+        try {
+//            int doctor_id = (new EditRandevouzTable()).databaseToRandevouz(Integer.parseInt(id)).getDoctor_id();
+
+//            if (!checkDate(request, response, datetime, String.valueOf(id))) {
+//                request.getSession().setAttribute("error", "Invalid date.");
+//                response.sendRedirect("view/doctor.jsp");
+//                return;
+//            }
+            int id = Integer.parseInt(booking_id);
+            (new EditBookingsTable()).updateBooking(id, state);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(petkeeper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(petkeeper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**

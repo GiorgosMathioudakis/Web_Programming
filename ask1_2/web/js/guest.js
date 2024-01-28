@@ -16,7 +16,7 @@ function displayDataKeeper(data) {
         html += "<td>" + item.job + "</td>";
         html += "<td>" + item.telephone + "</td>";
         html += "<td>" + item.property + "</td>";
-        html += "<td>" + item.propertydecription + "</td>";
+        html += "<td>" + item.propertydescription + "</td>";
         html += "<td>" + item.catkeeper + "</td>";
         html += "<td>" + item.catprice + "</td>";
         html += "<td>" + item.dogkeeper + "</td>";

@@ -1,19 +1,22 @@
 #information {
   grid-area: information;
   width: 400px;
-  margin-right: 70px;
-}
-#bookings {
-  grid-area: randevouz;
+}/*
+*/#bookings {
+  grid-area: bookings;
   width: 800px;
 }
 #petowners {
   grid-area: petowners;
 }
+#chatgpt {
+    grid-area: chatgpt;
+    margin-bottom: 50px;
+}
 .container-group {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-areas: "information randevouz" "petowners petowners";
+  grid-template-areas: "information bookings" "petowners petowners" "chatgpt chatgpt";
   column-gap: 20px;
   row-gap: 20px;
   margin-top: 60px;
@@ -423,4 +426,21 @@ p.from-them::after {
   left: 20px;
   transform: translate(-30px, -2px);
   width: 10px;
+}
+
+
+#chatgpt{
+    width:600px;
+    height: 600px;  
+}
+
+#userInput {
+    width: 150px;
+    height: 70px;
+
+}
+
+#gptbutton {
+    width: 40px;
+    height: 40px;
 }
