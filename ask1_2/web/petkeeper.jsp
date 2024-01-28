@@ -121,12 +121,19 @@
             <div id="container-title">Pet Owners</div>
             <%
                 user_rows = "<div class='card-grid'>";
-                
+                    if( bookings == null ) return;
+                int booking_id = 0;
                 if( petowners == null ) return;
                 if(keeper == null) return;
                 for(PetOwner petowner : petowners ) {
+                    for(int i = 0; i < bookings.size(); ++i) {
+                        Booking tmp1 = bookings.get(i);
+                        if(tmp1.getOwner_id() == petowner.getOwner_id()){
+                            booking_id = tmp1.getBooking_id();
+                        }
+                    }
                     user_rows += "<div class='container-card'>";
-                    user_rows += "<button user_id='"+petowner.getOwner_id()+"' keeper_id='"+keeper.getKeeper_id()+"' class='container-button chat'><i class='fas fa-comment-dots'></i></button>";
+                    user_rows += "<button owner_id='"+petowner.getOwner_id()+ "' booking_id='"+ booking_id +"' keeper_id='"+keeper.getKeeper_id()+"' class='container-button chat'><i class='fas fa-comment-dots'></i></button>";
                     user_rows += "<div class='card-top'></div>";
                     user_rows += "<div class='avatar-holder'><img src='img/"+petowner.getGender()+".svg'></div>";
                     user_rows += "<div class='name'><text>"+petowner.getFirstname() + " " + petowner.getLastname() +"</text></div>";
@@ -139,6 +146,32 @@
             %>
             
         </div>
+       <div id="chatgpt" class="container glass">
+            <div id="container-title">ChatGPT</div>
+            <input type="text" id="userInput" placeholder="Type your question...">
+            <button id="gptbutton" onclick="sendRequest()">Ask</button>
+            <div id="response"></div>
+        </div>
+            
+        <script>
+            function sendRequest() {
+                var userInput = document.getElementById("userInput").value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "chatGPT", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("response").innerHTML = this.responseText;
+                    }
+                };
+
+                xhr.send("prompt=" + encodeURIComponent(userInput));
+            }
+
+        </script>
+
     
             
            

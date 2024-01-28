@@ -64,6 +64,14 @@
         <servlet-name>ownerMessages</servlet-name>
         <servlet-class>servlets.ownerMessages</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>keeperMessages</servlet-name>
+        <servlet-class>servlets.keeperMessages</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>chatGPT</servlet-name>
+        <servlet-class>servlets.chatGPT</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetKeeper</servlet-name>
         <url-pattern>/GetKeeper</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>ownerMessages</servlet-name>
         <url-pattern>/ownerMessages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>keeperMessages</servlet-name>
+        <url-pattern>/keeperMessages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>chatGPT</servlet-name>
+        <url-pattern>/chatGPT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

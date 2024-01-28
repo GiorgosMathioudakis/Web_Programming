@@ -106,8 +106,7 @@ $(".doc-edit").on("click", function () {
 
 $(".chat").on("click", function () {
   var popup = $("#pop-up");
-  var user_id = $(this).attr("user_id");
-  var doctor_id = $(this).attr("doctor_id");
+  var booking_id = $(this).attr("booking_id");
 
   popup.get(0).innerHTML = "";
   popup.addClass("centered");
@@ -134,22 +133,25 @@ $(".chat").on("click", function () {
 
   $('#messages button').on('click', function () {
     var msg = $('#messages textarea').val();
-    popup.append("<p>doctor: " + msg + "</p>");
+    popup.append("<p>keeper: " + msg + "</p>");
 
     var xhr = new XMLHttpRequest();
 
   xhr.onload = function () {
-    if (xhr.readyState === 4 && xhr.status !== 400) {
-      
+    if ((xhr.readyState === 4 || xhr.readyState === 200 ) && xhr.status !== 400) {
+        var messages = JSON.parse(xhr.responseText);
+        console.log("prin");
+        console.log(messages);
+        console.log("meta");
     }
   };
 
   xhr.open(
     "POST",
-    "/Personalized_Health/doctorMessages?user_id=" +
-      user_id +
-      "&doctor_id=" +
-      doctor_id + 
+    "keeperMessages?booking_id=" +
+      booking_id +
+      "&booking_id=" +
+      booking_id + 
       "&message=" + 
       msg
   );
@@ -163,56 +165,15 @@ $(".chat").on("click", function () {
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status !== 400) {
       var messages = JSON.parse(xhr.responseText);
-      loadTreatments(messages);
     }
   };
 
   xhr.open(
     "GET",
-    "userMessages?user_id=" +
-      user_id +
-      "&doctor_id=" +
-      doctor_id
+    "ownerMessages?booking_id=" +
+      booking_id 
   );
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(null);
 });
 
-function displayDataKeeper(data) {
-    var html = "<table>";
-
-    // Add table header
-    html += "<tr><th>Username</th><th>Email</th><th>Password</th><th>Firstname</th><th>Lastname</th><th>birthdate</th><th>gender</th><th>country</th><th>City</th><th>Address</th><th>PesonalPage</th><th>Job</th><th>Telephone</th><th>Property</th><th>Property Desciption</th><th>CatKeeper</th><th>CatPrice</th><th>DogKeeper</th><th>DogPrice</th></tr>";
-
-    // Iterate over each item in the JSON array
-    data.forEach(function(item) {
-        html += "<tr data-id='" + item.keeper_id + "'>"; 
-        html += "<td>" + item.username + "</td>"; 
-        html += "<td>" + item.email + "</td>";    
-        html += "<td>" + item.password + "</td>";    
-        html += "<td>" + item.firstname + "</td>";    
-        html += "<td>" + item.lastname + "</td>";
-        html += "<td>" + item.birthdate + "</td>";
-        html += "<td>" + item.gender + "</td>";
-        html += "<td>" + item.country + "</td>";
-        html += "<td>" + item.city + "</td>";
-        html += "<td>" + item.address + "</td>";
-        html += "<td>" + item.personalpage + "</td>";
-        html += "<td>" + item.job + "</td>";
-        html += "<td>" + item.telephone + "</td>";
-        html += "<td>" + item.property + "</td>";
-        html += "<td>" + item.propertydecription + "</td>";
-        html += "<td>" + item.catkeeper + "</td>";
-        html += "<td>" + item.catprice + "</td>";
-        html += "<td>" + item.dogkeeper + "</td>";
-        html += "<td>" + item.dogprice + "</td>";
-        html += "<td><button onclick='deletePetKeeper(\"" + item.keeper_id + "\")'>Delete</button></td>";
-        
-        html += "</tr>";
-    });
-
-    html += "</table>";
-
-    // Set the table HTML to the div with id 'info'
-    document.getElementById("info").innerHTML = html;
-}
