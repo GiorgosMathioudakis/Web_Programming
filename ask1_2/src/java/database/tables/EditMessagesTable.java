@@ -11,11 +11,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Message;
-import mainClasses.Pet;
 
 /**
  *
@@ -26,6 +27,20 @@ public class EditMessagesTable {
     public void addMessageFromJSON(String json) throws ClassNotFoundException {
         Message msg = jsonToMessage(json);
         createNewMessage(msg);
+    }
+
+    public void addMessage(String booking_id, String message, String sender) throws ClassNotFoundException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        Message msg = new Message();
+        msg.setDatetime(dtf.format(now));
+        msg.setBooking_id(Integer.parseInt(booking_id));
+        msg.setMessage(message);
+        msg.setSender(sender);
+
+        createNewMessage(msg);
+
     }
 
     public Message jsonToMessage(String json) {

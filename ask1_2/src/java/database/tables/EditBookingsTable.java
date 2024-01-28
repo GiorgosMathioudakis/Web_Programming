@@ -6,6 +6,7 @@
 package database.tables;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import mainClasses.Booking;
 import database.DB_Connection;
 import java.sql.Connection;
@@ -21,7 +22,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mainClasses.Pet;
 import mainClasses.PetOwner;
 
 /**
@@ -61,12 +61,80 @@ public class EditBookingsTable {
         ResultSet rs;
         try {
             rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id= '" + id + "'");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Adjust the format as needed
+
             while (rs.next()) {
+                // Assuming you have a column named 'date' in your 'bookings' table
+                java.sql.Date sqlDate = rs.getDate("fromdate");
+                String fromdateString = (sqlDate != null) ? sdf.format(sqlDate) : null;
+                sqlDate = rs.getDate("todate");
+                String todateString = (sqlDate != null) ? sdf.format(sqlDate) : null;
 
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();
                 Booking doc = gson.fromJson(json, Booking.class);
+                // Set the string date in your Booking object
+                if (doc != null) {
+                    doc.setFromDate(fromdateString);
+                    doc.setToDate(todateString);
+                }
+
                 bookings.add(doc);
+
+            }
+            con.close();
+            bookings.sort(
+                    new Comparator<Booking>() {
+                @Override
+                public int compare(Booking r1, Booking r2) {
+                    try {
+                        Date firstdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(r1.getFromDate().replace("T", " ") + ":00");
+                        Date seconddate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(r2.getFromDate().replace("T", " ") + ":00");
+
+                        return firstdate.compareTo(seconddate);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return 0;
+                }
+
+            });
+            return bookings;
+        } catch (Exception e) {
+            System.err.println("Exception in databaseToRandevouzArraylist doctor_id: " + id + "! ");
+            System.err.println(e.getMessage());
+        }
+        con.close();
+        return null;
+    }
+
+    public ArrayList<Booking> databaseToBookingArraylist1(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Booking> bookings = new ArrayList<>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id= '" + id + "' AND status != 'rejected'");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Adjust the format as needed
+
+            while (rs.next()) {
+                // Assuming you have a column named 'date' in your 'bookings' table
+                java.sql.Date sqlDate = rs.getDate("fromdate");
+                String fromdateString = (sqlDate != null) ? sdf.format(sqlDate) : null;
+                sqlDate = rs.getDate("todate");
+                String todateString = (sqlDate != null) ? sdf.format(sqlDate) : null;
+
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Booking doc = gson.fromJson(json, Booking.class);
+                // Set the string date in your Booking object
+                if (doc != null) {
+                    doc.setFromDate(fromdateString);
+                    doc.setToDate(todateString);
+                }
+
+                bookings.add(doc);
+
             }
             con.close();
             bookings.sort(
@@ -143,66 +211,26 @@ public class EditBookingsTable {
         return null;
     }
 
-    public String getPetType(int owner_id) {
+    public String getPetType(int pet_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
         try {
-            Pet pet = (new EditPetsTable()).petOfOwner(owner_id);
-            return pet.getType();
-        } catch (SQLException ex) {
-            Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+            rs = stmt.executeQuery("SELECT type FROM pets WHERE pet_id= '" + pet_id + "'");
+            System.out.println(rs);
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
+            String type = jsonObject.get("type").getAsString();
+            return type;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
         }
         return null;
     }
-
-//    public Set<PetOwner> databaseToPatients(int keeper_id) throws SQLException, ClassNotFoundException {
-//        Connection con = DB_Connection.getConnection();
-//        Statement stmt = con.createStatement();
-//        ArrayList<Booking> bookings = new ArrayList<>();
-//        ResultSet rs;
-//        try {
-//            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id=" + keeper_id + " AND status='finished';");
-//            while (rs.next()) {
-//                String json = DB_Connection.getResultsToJSON(rs);
-//                Gson gson = new Gson();
-//                Booking doc = gson.fromJson(json, Booking.class);
-//                bookings.add(doc);
-//            }
-//            con.close();
-//            Set<PetOwner> owners = new HashSet<PetOwner>();
-//
-//            for (Booking booking : bookings) {
-//                if (booking.getOwner_id() == 0) {
-//                    continue;
-//                }
-//                owners.add((new EditPetOwnersTable()).databaseToPetOwners(booking.getOwner_id()));
-//            }
-//
-//            Set<SimpleUser> finishedSet = new HashSet<SimpleUser>();
-//            boolean sameUserFlag = false;
-//            for (SimpleUser user : owners) {
-//                for (SimpleUser tmp : finishedSet) {
-//                    if (user.getUsername().contentEquals(tmp.getUsername())) {
-//                        sameUserFlag = true;
-//                        break;
-//                    }
-//                }
-//                if (sameUserFlag == true) {
-//                    sameUserFlag = false;
-//                    continue;
-//                }
-//                finishedSet.add(user);
-//            }
-//
-//            return finishedSet;
-//
-//        } catch (Exception e) {
-//            System.err.println("Exception in databaseToPatients where doctor_id: " + doctor_id + "! ");
-//            System.err.println(e.getMessage());
-//        }
-//        con.close();
-//        return null;
-//    }
 
     public Booking jsonToBooking(String json) {
         Gson gson = new Gson();
@@ -217,7 +245,7 @@ public class EditBookingsTable {
         return json;
     }
 
-    public void updateBooking(int bookingID,  String status) throws SQLException, ClassNotFoundException {
+    public void updateBooking(int bookingID, String status) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         String updateQuery = "UPDATE bookings SET status='"+status+"' WHERE booking_id= '"+bookingID+"'";

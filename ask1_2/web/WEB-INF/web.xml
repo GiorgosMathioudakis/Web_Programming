@@ -60,6 +60,10 @@
         <servlet-name>petkeeper</servlet-name>
         <servlet-class>servlets.petkeeper</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ownerMessages</servlet-name>
+        <servlet-class>servlets.ownerMessages</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetKeeper</servlet-name>
         <url-pattern>/GetKeeper</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>petkeeper</servlet-name>
         <url-pattern>/petkeeper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ownerMessages</servlet-name>
+        <url-pattern>/ownerMessages</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

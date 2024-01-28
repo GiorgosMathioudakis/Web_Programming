@@ -4,6 +4,11 @@
     Author     : giorgosmathioudakis
 --%>
 
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="mainClasses.*"%>
 <%@page import="java.util.Set"%>
 <%@page import="database.tables.*"%>
@@ -25,13 +30,13 @@
 <%
     String username = (String)session.getAttribute("username");
     String password = (String)session.getAttribute("password");
-    PetKeeper keeper = (new EditPetKeepersTable()).databaseToPetKeepers(username, password);
+        PetKeeper keeper = (new EditPetKeepersTable()).databaseToPetKeepers(username, password);
     if(keeper == null) {
         response.sendRedirect("logout");
         return;
     }
 //    Make the bookings List
-    ArrayList<Booking> bookings = (ArrayList<Booking>) (new EditBookingsTable()).databaseToBookingArraylist(keeper.getKeeper_id());
+    ArrayList<Booking> bookings = (ArrayList<Booking>) (new EditBookingsTable()).databaseToBookingArraylist1(keeper.getKeeper_id());
 //  Make the petowners set
     Set<PetOwner> petowners = (Set<PetOwner>) (new EditBookingsTable()).databaseToPetOwners(keeper.getKeeper_id());
     
@@ -71,7 +76,6 @@
         <div id="bookings" class="container glass">
             <form action="logout"><button id="go-back" class="container-button"><i class="fas fa-sign-out"></i></button>
             </form>
-            <button id="pdf-btn" class="container-button"><i class="far fa-file-pdf"></i></button>
             <div id="container-title">Bookings</div>
             <%
                 String error = (String)session.getAttribute("error");
@@ -94,14 +98,11 @@
                     String user_rows = "";
 
 
-                    EditPetOwnersTable ut = new EditPetOwnersTable();
                     if( bookings == null ) return;
                 for(int i = 0; i < bookings.size(); ++i) {
                     Booking tmp = bookings.get(i);
-//                    if(tmp.getStatus().contentEquals("cancelled") || tmp.getStatus().contentEquals("done")) continue;
                     user_rows += "<tr>";
-//                    user_rows += "<td>"+ (tmp.getOwner_id() == 0 ? "-" : ut.databaseToPetOwners(tmp.getOwner_id()).getUsername()) + "</td>";
-                    user_rows += "<td>"+ tmp.getPet_id() +"</td>";
+                    user_rows += "<td>"+ (new EditBookingsTable()).getPetType(tmp.getPet_id()) +"</td>";
                     user_rows += "<td>"+ tmp.getFromDate()+"</td>";
                     user_rows += "<td>"+ tmp.getToDate() +"</td>";
                     user_rows += "<td>"+ tmp.getPrice()+"</td>";
@@ -120,6 +121,7 @@
             <div id="container-title">Pet Owners</div>
             <%
                 user_rows = "<div class='card-grid'>";
+                
                 if( petowners == null ) return;
                 if(keeper == null) return;
                 for(PetOwner petowner : petowners ) {

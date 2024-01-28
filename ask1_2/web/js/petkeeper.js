@@ -60,17 +60,10 @@ $(".doc-edit").on("click", function () {
   );
   
 
-  $("#confirm-randevou").on("click", function () {
-    var datetime = $("#birthdaytime").val();
-    var price = $("#price").val();
-    var doctorInfo = $("#doctor-info-area").val();
-    var state = $("#states").val();
+  $("#confirm-booking").on("click", function () {
 
-    if (datetime == "" && price == "" && doctorInfo == " " && state != "") {
-      datetime = "null";
-      price = "null";
-      doctorInfo = "null";
-    } else if (datetime == "" || price == "" || doctorInfo == " " || state == "") return;
+    
+    var state = $("#states").val();
 
     var xhr = new XMLHttpRequest();
 
@@ -78,16 +71,10 @@ $(".doc-edit").on("click", function () {
       window.location.reload();
     };
 
-    xhr.open(
+      xhr.open(
       "PUT",
-      "/Personalized_Health/doctor?id=" +
+      "petkeeper?id=" +
         id +
-        "&datetime=" +
-        datetime +
-        "&price=" +
-        price +
-        "&doctorInfo=" +
-        doctorInfo +
         "&state=" +
         state
     );
@@ -112,74 +99,6 @@ $(".doc-edit").on("click", function () {
     $("#pop-up").removeClass("centered");
     $("#pop-up").removeClass("bigger");
     $("#pop-up").removeClass("taller");
-  });
-});
-
-$("#pdf-btn").on("click", function () {
-  var popup = $("#pop-up");
-  var id = $(this).attr("id");
-
-  popup.get(0).innerHTML = "";
-  popup.addClass("centered");
-  popup.addClass("bigger");
-
-  popup.append("<h5 style='font-size: 16px'>Print PDF<h5>");
-  popup.append("<p>Please select the day you want to print.</p>");
-
-  popup.append(
-    "<input id='pdf-date' type='datetime-local' id='datetime-pdf' name='datetime-pdf' required>"
-  );
-
-  popup.append(
-    '<button id="confirm-pdf" class="pop-up-btn container-button">Confirm</button>'
-  );
-  popup.append(
-    '<button id="cancel" class="pop-up-btn container-button">Cancel</button>'
-  );
-
-  $("#cancel").on("click", function () {
-    $("#pop-up").get(0).innerHTML = "";
-    $("#pop-up").removeClass("centered");
-    $("#pop-up").removeClass("bigger");
-    $("#pop-up").removeClass("taller");
-  });
-
-  $("#confirm-pdf").on("click", function () {
-    var popup = $("#pop-up");
-    var date = $("#pdf-date").val();
-    var doctor_id = $("#doctorId").val();
-
-    popup.get(0).innerHTML = "";
-    popup.addClass("centered");
-    popup.removeClass("bigger");
-
-    popup.append(
-      "<h5 style='font-size: 16px'>Your pdf is ready do you want to install it ?<h5>"
-    );
-
-    popup.append(
-      '<form action="/Personalized_Health/pdfCreator"><input name="doctor_id" value="' +
-        doctor_id +
-        '" hidden><input name="date" value="' +
-        date +
-        '" hidden><button type="sumbit" id="yes" class="pop-up-btn container-button"><i class="fas fa-check"></i></button></form>'
-    );
-    popup.append(
-      '<button id="no" class="pop-up-btn container-button"><i class="far fa-times"></i></button>'
-    );
-
-    $("#no").on("click", function () {
-      $("#pop-up").get(0).innerHTML = "";
-      $("#pop-up").removeClass("centered");
-      $("#pop-up").removeClass("bigger");
-      $("#pop-up").removeClass("taller");
-    });
-
-     $("#yes").on("click", function () {
-       $("#pop-up").get(0).innerHTML = "";
-       $("#pop-up").removeClass("centered");
-       $("#pop-up").removeClass("bigger");
-     });
   });
 });
 
@@ -250,7 +169,7 @@ $(".chat").on("click", function () {
 
   xhr.open(
     "GET",
-    "/Personalized_Health/userMessages?user_id=" +
+    "userMessages?user_id=" +
       user_id +
       "&doctor_id=" +
       doctor_id
