@@ -100,6 +100,14 @@
         <servlet-name>chatGPT</servlet-name>
         <servlet-class>servlets.chatGPT</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReadyReview</servlet-name>
+        <servlet-class>servlets.ReadyReview</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddReview</servlet-name>
+        <servlet-class>servlets.AddReview</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetKeeper</servlet-name>
         <url-pattern>/GetKeeper</url-pattern>
@@ -193,6 +201,12 @@
         <url-pattern>/AddBooking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ReadyReview</servlet-name>
+        <url-pattern>/ReadyReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddReview</servlet-name>
+        <url-pattern>/AddReview</url-pattern>
         <servlet-name>keeperMessages</servlet-name>
         <url-pattern>/keeperMessages</url-pattern>
     </servlet-mapping>

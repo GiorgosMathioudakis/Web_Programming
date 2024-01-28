@@ -209,9 +209,10 @@ function displayDataOwners(data) {
     html += "<tr><th>Telephone</th><td>" + data.telephone + "</td></tr>";
 
     // Edit button row
-    html += "<tr><td colspan='2'><button onclick='editPetOwner(\"" + data.owner_id + "\")'>Edit</button></td></tr>";
+    html += "<tr><td colspan='2'><button class='container-button' onclick='editPetOwner(\"" + data.owner_id + "\")'>Edit</button></td></tr>";
     globalownerid = data.owner_id;
     availablekeepers(globalownerid);
+    RevealReview(globalownerid);
     html += "</table>";
 
     document.getElementById("info").innerHTML = html;
@@ -232,7 +233,7 @@ function editPetOwner(ownerId) {
     // Change the button in the last row
     var lastRow = rows[rows.length - 1];
     var buttonCell = lastRow.cells[0];
-    buttonCell.innerHTML = "<button onclick='savePetOwner(\"" + ownerId + "\")'>Save</button>";
+    buttonCell.innerHTML = "<button class='container-button' onclick='savePetOwner(\"" + ownerId + "\")'>Save</button>";
 }
 
 function savePetOwner(ownerId) {
@@ -258,7 +259,7 @@ function savePetOwner(ownerId) {
     // Change the button back to "Edit"
     var lastRow = rows[rows.length - 1];
     var buttonCell = lastRow.cells[0];
-    buttonCell.innerHTML = "<button onclick='editPetOwner(\"" + ownerId + "\")'>Edit</button>";
+    buttonCell.innerHTML = "<button class='container-button' onclick='editPetOwner(\"" + ownerId + "\")'>Edit</button>";
             
     // Send updatedData to the server
     var xhr = new XMLHttpRequest();
@@ -272,7 +273,7 @@ function savePetOwner(ownerId) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                location.reload();
+               // location.reload();
             });
             
             
@@ -345,6 +346,17 @@ document.getElementById('pet_form').addEventListener('submit', function(e) {
         
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log("PET ADDED SUCCESSFULLY" );
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Pet Added successfully!',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                location.reload();
+            });
+            
             var temp = document.getElementById("pet_form");
             temp.style.display = "none";
             $("#add_Pet").html("SUCCESSFULL INSERTION OF PET");
@@ -409,7 +421,7 @@ function availablekeepers(globalid) {
                     html += "<td>" + petKeeper.catprice + "</td>";
                     price = petKeeper.catprice;
                 }
-                html += "<td><button class='bookbutton' onclick='bookingkeeper(" + petKeeper.keeper_id + ", " + price + ")'>Book Keeper</button></td>"; // Add the action button
+                html += "<td><button class='container-button' onclick='bookingkeeper(" + petKeeper.keeper_id + ", " + price + ")'>Book Keeper</button></td>"; // Add the action button
                 
             
             
@@ -420,7 +432,7 @@ function availablekeepers(globalid) {
             // Set the table HTML to the div with id 'availablekeepers'
             document.getElementById("availablekeepers").innerHTML = html;
                 } else if (xhr1.status !== 200) {
-                    $("#infost").html("There are no available PetKeepers");
+                    $("#availablekeepers").html("There are no available PetKeepers");
                 }
             };
 
@@ -460,6 +472,17 @@ document.getElementById('book').addEventListener('submit', function(e){
                 if (xhr1.readyState === 4) {
                     if (xhr1.status === 200) {
                         console.log("Successful booking");
+                        
+                        Swal.fire({
+                        title: 'Success!',
+                        text: 'Booking Successfull!',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                        }).then(() => {
+                           // location.reload();
+                        });
+            
                         $("#bookingkeeper").html("SUCCESSFUL BOOKING");
                     } else {
                         console.log("Error in booking");
@@ -490,30 +513,77 @@ function bookingkeeper(keeperid,price){
     globalprice = price;
     var booking = document.getElementById("booking");
     console.log(booking);
-    booking.style.display = "block";
-//    var xhr = new XMLHttpRequest();
-//    xhr.onload = function () {
-//        
-//        if (xhr.readyState === 4 && xhr.status === 200) {
-//            console.log("PET ADDED SUCCESSFULLY" );
-//            var temp = document.getElementById("pet_form");
-//            temp.style.display = "none";
-//            $("#add_Pet").html("SUCCESSFULL INSERTION OF PET");
-//            
-//              
-//              
-//            
-//        } else if (xhr.status !== 200) {
-//             $("#add_Pet").html("Error");
-//        }
-//        
-//    };
-//    var params = new URLSearchParams(new FormData(document.getElementById('pet_form'))).toString();
-//    params += "&owner_id=" + encodeURIComponent(globalownerid);
-//    params += "&pet_id=" + encodeURIComponent(randomBinaryString);
-//
-//    xhr.open('POST', "AddPet");
-//    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-//    xhr.send(params);
-    
+    booking.style.display = "block";    
 }
+
+//REVIEW CODE 
+var reviewbooking;
+function RevealReview(globalid) {
+    // Your script goes here
+    console.log("The HTML is fully loaded Pet Owner Login");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        
+        if (xhr.readyState === 4 && xhr.status === 200) {
+              reviewbooking = JSON.parse(xhr.responseText);
+
+                // Process the bookings
+                reviewbooking.forEach(function(booking) {
+                console.log("Booking ID:", booking.booking_id);
+                // Additional processing here
+                });
+                $("#Reviewdiv").html("BOOKING AVAILABLE FOR REVIEW");
+                var review = document.getElementById("rev");
+                review.style.display = "block";
+               
+        } else if (xhr.status !== 200) {
+             $("#Reviewdiv").html("THERE ARE NOT AVAILABLE BOOKINGS FOR REVIEW");
+        }
+        
+    };
+    
+    console.log(globalownerid);
+    xhr.open('GET',"ReadyReview?ownerid=" + encodeURIComponent(globalownerid));
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+document.getElementById('reviewform').addEventListener('submit', function(e){
+    e.preventDefault(); // Prevent default form submission
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Review Successfully Posted,Thank You!',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+               // location.reload();
+            });
+            
+            $("#rev").html("SUCCESSFULL REVIEW THANK YOU");
+
+            
+        }else{
+            
+        }
+    };
+
+    var params = new URLSearchParams(new FormData(document.getElementById('reviewform'))).toString();
+            params += "&owner_id=" + encodeURIComponent(globalownerid);
+            params += "&keeper_id=" + encodeURIComponent(reviewbooking[0].keeper_id);
+            
+
+            xhr.open('POST', "AddReview");
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.send(params);
+    
+});
+
+
+
+
+

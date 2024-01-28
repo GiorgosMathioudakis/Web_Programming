@@ -9,23 +9,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" defer></script>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="css/petowner.css">
         <script src="js/petowner.js" defer></script>
         <title>Pet Owner Page</title>
         
     </head>
     <body>
-        <div id="pop-up" class="container glass "></div>
+        <div id="pop-up" class="container">
+        </div>
         <div class="window glass">
             <div id="information">
+                <form action="logout">
+                    <button id="logout" class="container-button" style="position:absolute; top:50px; right:200px"><i class="fas fa-sign-out"></i></button>
+                </form>
                 <div id="container-title">Information</div>
                 <div id="info"></div>
                 
         
            </div>
-           <div id="add_Pet">
+           <div id="add_Pet" >
             <div id="container-title">Add Pet</div>
-            <button id="addPetBtn">Add Pet</button>
+            <button id="addPetBtn" class="container-button">Add Pet</button>
                 <div id="pet_div" style="display: none;">
                     <form id="pet_form">
                         <label>Pet Name:</label><br>
@@ -44,7 +49,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <textarea id="description" name="description" rows="4" cols="35" placeholder="E.x.Type of food,Special needs"></textarea><br>
                         <label>Photo:</label><br>
                         <input type="text" id="photo" name="photo" placeholder="Photo" required /><br>
-                        <button type="submit">Submit</button><br>
+                        <button type="submit" class="container-button">Submit</button><br>
                     </form>
                 </div>
             </div>
@@ -60,144 +65,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <input type="date" id="fromdate" name="fromdate"><br>`
                         <label id="Todate">To Date:</label><br>
                         <input type="date" id="todate" name="todate"><br>
-                        <input type="submit" value="Book NOW!">
+                        <input type="submit" class="container-button" id="submitbutton" value="Book NOW!">
                     </form>
                     
                 </div>
-                <div id="container-title">BloodTest Comparison</div>
-                <table align='center'>
-                <tr>
-                    <th>Test Date</th>
-                    <th>Blood Sugar</th>
-                    <th>Diff</th>
-                    <th>Cholesterol</th>
-                    <th>Diff</th>
-                    <th>Iron</th>
-                    <th>Diff</th>
-                    <th>Vitamin D3</th>
-                    <th>Diff</th>
-                    <th>Vitamin B12</th>
-                    <th>Diff</th>
-
-                </tr>
-                </table>
-        </div>
-                <br>
-        <div id='visualization'>
-            <div id='container-title'>Test Visualization and Treatments</div>
-            
-                    
-        </div>
-            <br>
-        <div id='Treatments'>
-            <div id='container-title'>Running Treatments</div>
-            <table align='center'>
-                <tr>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Information</th>
-                </tr>
-            </table>
-        </div>
-            <br>
-        <div id="find-doctors">
-            <div id='container-title'>Available Doctors</div>
-  
-            <div>
-            <button class='container-button bigger-btn' onclick='printDocsSortedBy("distance")'>Sort by duration</button>
-            <button class='container-button bigger-btn' onclick='printDocsSortedBy("duration")'>Sort by distance</button>
-            <button class='container-button bigger-btn' onclick='printDocsSortedBy("price")'>Sort by Price</button>
-            </div>
-            <div id="doctor-list">
-                <table border="1" cellpadding="3" id="printTable">
-                    <tbody id="doctors-table">
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>      
-                            <th>Email</th>
-                            <th>Birthdate</th>
-                            <th>City</th>
-                            <th>Address</th>
-                            <th>Telephone</th>
-                            <th>Specialty</th>
-                            <th>Doctor Info</th>
-                            <th>Distance</th>
-                            <th>Drive Time</th>
-                            <th>Price</th>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-            <br>
-        <div id='book-appointment'>
-            <div id='container-title'>Book Appointment</div>
-            <div id='doc-appointments'>
-                <table border="1" cellpadding="3" id="printTable">
-                    <tbody id="doc-appointments-table">
-                        <tr>
-                            <th>Date and Time</th>
-                            <th>Price</th>      
-                            <th>Doctor Note</th>
-                            <th></th>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-            <br>
-        <div id='appointments'>
-            <div id='container-title'>Appointments</div>
-   
-            <table border="1" cellpadding="3" id="printTable">
-                    <tbody id="doc-appointments-table">
-                        <tr>
-                            <th>Date and Time</th>
-                            <th>Price</th>      
-                            <th>Doctor Note</th>
-                            <th></th>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-
-
-        </div>
-        <div id='appointments'>
-            <div id='container-title'>Chat with Doctors</div>
-   
-            <table border="1" cellpadding="3" id="printTable">
-                    <tbody id="doc-appointments-table">
-                        <tr>
-                            <th>Firstname</th>
-                            <th>Lastname</th>      
-                            <th>Doctor Notes</th>   
-                            <th>Email</th>
-                            <th></th>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-        </div>          
-                        <div style='margin-top: 10px'>Enter a food to get it's nutritional value: </div>
-                        <input id='food' type="text" placeholder="Eg: banana"><button id='getCommonDisease' class="container-button" style="width: 70px">Submit</button>
-                        <div id='nutrition-api-response'></div>
+             </div>
+            <div id="Reviews" > 
+                <div id="container-title">Review of a PetKeeper</div>
+                <div id="Reviewdiv"></div>
+                <div id="rev"  style="display: none;">
+                    <form id="reviewform">
+                        <label id="review">Review :</label><br>
+                        <textarea id="reviewdesc" name="reviewdesc" rows="4" cols="35" placeholder="E.x.Condition of staying,communication e.t.c"></textarea><br>
+                        <label for="score">Select a score (0-10):</label><br>
+                        <select id="score" name="score">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select><br>
+                        <input type="submit" class="container-button" id="reviewbutton" style="margin-top: 5%" value="submit">
+                    </form>
+                </div>
+            </div>    
         
-
-             <footer>
-                <a href="https://www.vrisko.gr/efimeries-farmakeion/irakleio" target="_blank">
-                <img src="https://www.vrisko.gr/graphlink/Pharmacies/image/160x60_Banner_n/?Region=irakleio&SmallRegion=true&NativeRegion=%ce%97%cf%81%ce%ac%ce%ba%ce%bb%ce%b5%ce%b9%ce%bf&" /></a>
-                
-                <a href="https://www.vrisko.gr/efimeries-nosokomeion?SelectedCity=hrakleio" target="_blank">
-                    <img src="https://www.vrisko.gr/graphlink/Hospitals/image/160x60_Banner_n/?Prefecture=hrakleio&SmallPrefecture=true&NativePrefecture=%ce%97%ce%a1%ce%91%ce%9a%ce%9b%ce%95%ce%99%ce%9f&" /></a>
-                <a href="https://covid19.gov.gr" target="_blank">
-                    <img src="https://www.gov.gr/gov_gr-thumb-1200.png"  /></a>
-            </footer>
         </div>
-        
     </body>
 </html>

@@ -4,13 +4,11 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
 import database.tables.EditBookingsTable;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +19,7 @@ import mainClasses.Booking;
  *
  * @author lympe
  */
-public class AddBooking extends HttpServlet {
+public class ReadyReview extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +38,10 @@ public class AddBooking extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddBooking</title>");
+            out.println("<title>Servlet ReadyReview</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddBooking at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ReadyReview at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +59,27 @@ public class AddBooking extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String ownerIdStr = request.getParameter("ownerid");
+        int ownerId = Integer.parseInt(ownerIdStr);
+
+        try {
+            List<Booking> bookings = new EditBookingsTable().databaseGetPetOwners(ownerId);
+
+            if (bookings.isEmpty()) {
+                // No bookings found, set status code to 501
+                response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
+                response.getWriter().write("No bookings available");
+            } else {
+                // Bookings found, return them as JSON
+                String json = new Gson().toJson(bookings);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+            }
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server error occurred");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -75,40 +93,7 @@ public class AddBooking extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        EditBookingsTable book = new EditBookingsTable();
-        Booking temp = new Booking();
-        String owner_id = request.getParameter("owner_id");
-        String keeper_id = request.getParameter("keeper_id");
-        String pet_id = request.getParameter("pet_id");
-        String price = request.getParameter("price");
-        String todate = request.getParameter("todate");
-        String fromdate = request.getParameter("fromdate");
-        try {
-            LocalDate fromDate = LocalDate.parse(fromdate);
-            LocalDate toDate = LocalDate.parse(todate);
-            long daysBetween = ChronoUnit.DAYS.between(fromDate, toDate);
-
-            int pricePerDay = Integer.parseInt(price);
-            int totalPrice = (int) daysBetween * pricePerDay;
-
-            System.out.println(fromdate + todate + pet_id);
-            int kid = Integer.parseInt(keeper_id);
-            int oid = Integer.parseInt(owner_id);
-            int pid = Integer.parseInt(pet_id);
-            temp.setFromDate(fromdate);
-            temp.setKeeper_id(kid);
-            temp.setOwner_id(oid);
-            temp.setPet_id(pid);
-            temp.setPrice(totalPrice);
-            temp.setToDate(todate);
-            temp.setStatus("requested");
-            response.setStatus(200);
-
-            book.createNewBooking(temp);
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Registers.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
