@@ -16,35 +16,110 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" defer></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="css/basicStyle.css">
-    <link rel="stylesheet" href="css/keeperStyle.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/petowner.css">
     <script src="js/petowner.js" defer></script>
-    <title>Owner Page</title>
+    <title>Pet Owner Page</title>
+
 </head>
 <%
     String username = (String)session.getAttribute("username");
     String password = (String)session.getAttribute("password");
-    username = "mountanton";
-    password = "ab$12345";
+
     PetOwner petowner = (new EditPetOwnersTable()).databaseToPetOwners(username,password);
     if(petowner == null) {
         response.sendRedirect("logout");
         return;
     }
-
 %>
-
-<body>
-    <div id="pop-up" class="container glass"></div>
-    <div class="container-group">
+    <body>
+        <div id="pop-up" class="container glass"></div>
+        <div class="window glass">
+            <div id="information">
+                <form action="logout">
+                    <button id="logout" class="container-button" style="position:absolute; top:50px; right:200px"><i class="fas fa-sign-out"></i></button>
+                </form>
+                <div id="container-title">Information</div>
+                <div id="info"></div>
+                
         
+           </div>
+           <div id="add_Pet" >
+            <div id="container-title">Add Pet</div>
+            <button id="addPetBtn" class="container-button">Add Pet</button>
+                <div id="pet_div" style="display: none;">
+                    <form id="pet_form">
+                        <label>Pet Name:</label><br>
+                        <input type="text" id="petName" name="petName" placeholder="Pet Name" required /><br>
+                        <label>Type(dog or cat):</label><br>
+                        <input type="text" id="type" name="type" placeholder="Type(cat or dog)" required /><br>
+                        <label>Breed(:</label><br>
+                        <input type="text" id="breed" name="breed" placeholder="Breed" required /><br>
+                        <label>Gender:</label><br>
+                        <input type="text" id="gender" name="gender" placeholder="Gender" required /><br>
+                        <label>Weight:</label><br>
+                        <input type="text" id="weight" name="weight" placeholder="Weight" required /><br>
+                        <label>BirthYear:</label><br>
+                        <input type="text" id="birth" name="birth" placeholder="BirthYear" required /><br>
+                        <label>Description:</label><br>
+                        <textarea id="description" name="description" rows="4" cols="35" placeholder="E.x.Type of food,Special needs"></textarea><br>
+                        <label>Photo:</label><br>
+                        <input type="text" id="photo" name="photo" placeholder="Photo" required /><br>
+                        <button type="submit" class="container-button">Submit</button><br>
+                    </form>
+                </div>
+            </div>
+           <div id="available">
+                <div id="container-title">Available PetKeepers</div>
+                <div id="availablekeepers"></div>
+           </div>
+           <div id="booking" style="display: none">
+                <div id="container-title">Book PetKeeper</div>
+                <div id="bookingkeeper">
+                    <form id="book">
+                        <label id="Fromdate">From Date:</label><br>
+                        <input type="date" id="fromdate" name="fromdate"><br>`
+                        <label id="Todate">To Date:</label><br>
+                        <input type="date" id="todate" name="todate"><br>
+                        <input type="submit" class="container-button" id="submitbutton" value="Book NOW!">
+                    </form>
+                    
+                </div>
+             </div>
+            <div id="Reviews" > 
+                <div id="container-title">Review of a PetKeeper</div>
+                <div id="Reviewdiv"></div>
+                <div id="rev"  style="display: none;">
+                    <form id="reviewform">
+                        <label id="review">Review :</label><br>
+                        <textarea id="reviewdesc" name="reviewdesc" rows="4" cols="35" placeholder="E.x.Condition of staying,communication e.t.c"></textarea><br>
+                        <label for="score">Select a score (0-10):</label><br>
+                        <select id="score" name="score">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select><br>
+                        <input type="submit" class="container-button" id="reviewbutton" style="margin-top: 5%" value="submit">
+                    </form>
+                </div>
+            </div>    
+            
+            <div class="container-group">
        
-        <div id="petkeeper" class="container glass">
+        <div id="petowners" class="containerno glass">
             <div id="container-title">Pet Keeper</div>
             <%
                 PetKeeper keeper = null;
@@ -78,6 +153,10 @@
             %>
             
         </div>    
+        
+        </div>
+
+   
 </body>
 
 </html>

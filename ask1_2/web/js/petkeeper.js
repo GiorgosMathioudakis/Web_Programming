@@ -89,7 +89,6 @@ $(".doc-edit").on("click", function () {
       window.location.reload();
     };
 
-    xhr.open("DELETE", "/Personalized_Health/doctor?id=" + id);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send();
   });
