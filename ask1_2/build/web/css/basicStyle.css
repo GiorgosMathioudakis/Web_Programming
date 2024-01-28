@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* || General Style */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: linear-gradient(130deg, #71b7e6, #9b59b6); */
+  background-image: url(../img/background.jpg.avif);
+  background-repeat: repeat;
+}
+
+/* || Typography */
+
+#container-title {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* || Containers */
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 3em;
+  z-index: 1;
+  border-radius: 3em;
+  backdrop-filter: blur(27px);
+  border: solid 2px transparent;
+  background-clip: padding-box;
+  box-shadow: 6px 6px 19px 1px;
+  font-weight: 500;
+}
+
+.container-button {
+  transition: all 0.3s ease;
+  background: #bbcf92;
+  backdrop-filter: blur(40px);
+  background-clip: padding-box;
+  z-index: 0;
+  border-radius: 3em;
+  border: none;
+  padding: 5px;
+  font-weight: 500;
+  color: #004c80;
+}
+
+.container-button:hover {
+  transform: scale(1.2);
+  transform-origin: center;
+  background: #004c80;
+  color: #bbcf92;
+  cursor: pointer;
+}
+
+/* Input Boxes */
+.container .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+
+.input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+  border-color: #9b59b6;
+}
+
+/* Scroll */
+
+body::-webkit-scrollbar {
+  width: 12px;
+  margin-right: 15px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #004c80;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #bbcf92;
+  border-radius: 20px;
+  border: 3px solid #bbcf92;
+}
+
+/* || Media Queries */
+
+/* Container */
+@media (max-width: 725px) {
+  .container {
+    max-width: 100%;
+    margin: 0 20px 0 20px;
+  }
+
+  .container .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+}

@@ -155,7 +155,7 @@ public class EditPetOwnersTable {
             String json = DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionUsername! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -172,7 +172,7 @@ public class EditPetOwnersTable {
             String json = DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionEmail! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -190,7 +190,7 @@ public class EditPetOwnersTable {
             String json=DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionOwnerJSON! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -255,7 +255,7 @@ public class EditPetOwnersTable {
 
             return owners;
         } catch (SQLException e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionAllPetOwners! ");
             System.err.println(e.getMessage());
             return null;
         } finally {

@@ -56,7 +56,7 @@ public class EditPetsTable {
             return pets;
 
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionDatabasetoPetsArraylist! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -79,7 +79,7 @@ public class EditPetsTable {
             }
             return pet;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exception!petOfOwner");
             System.err.println(e.getMessage());
         }
         return null;
@@ -101,7 +101,7 @@ public class EditPetsTable {
             }
             return pets;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionPetsToDatabase! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -123,7 +123,7 @@ public class EditPetsTable {
             }
             return pets;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionAllPets! ");
             System.err.println(e.getMessage());
         }
         return null;
