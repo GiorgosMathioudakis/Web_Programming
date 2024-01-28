@@ -10,8 +10,8 @@ package mainClasses;
  * @author mountant
  */
 public class Pet {
-    int pet_id, owner_id;
-    String type, breed, gender, name;
+    int owner_id;
+    String type, breed, gender, name, pet_id;
 
     public String getName() {
         return name;
@@ -24,11 +24,11 @@ public class Pet {
     double weight;
     String description, photo;
 
-    public int getPet_id() {
+    public String getPet_id() {
         return pet_id;
     }
 
-    public void setPet_id(int pet_id) {
+    public void setPet_id(String pet_id) {
         this.pet_id = pet_id;
     }
 

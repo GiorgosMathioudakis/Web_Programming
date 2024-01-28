@@ -1,0 +1,182 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 26 Ιαν 2024, 4:36:47 μ.μ.
+    Author     : lympe
+*/
+#pet_div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+#info table {
+    width: 70%;
+    border-collapse: collapse; /* Ensures that border lines are adjacent */
+}
+
+/* Style for table cells */
+#info table td, #info table th {
+    border: 1px solid #ddd; /* Adds a border to each cell */
+    padding: 5px; /* Adds some padding inside each cell */
+}
+
+/* Style for table headers (optional) */
+#info table th {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: left;
+    background-color: #f2f2f2; /* Adds a background color to header cells */
+    color: black; /* Text color for header cells */
+}
+
+#availablekeepers table {
+    width: 70%;
+    border-collapse: collapse; /* Ensures that border lines are adjacent */
+}
+
+/* Style for table cells */
+#availablekeepers table td, #availablekeepers table th {
+    border: 1px solid #ddd; /* Adds a border to each cell */
+    padding: 3px; /* Adds some padding inside each cell */
+}
+
+/* Style for table headers (optional) */
+#availablekeepers table th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: left;
+    background-color: #f2f2f2; /* Adds a background color to header cells */
+    color: black; /* Text color for header cells */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: linear-gradient(130deg, #71b7e6, #9b59b6); */
+  background-image: url(../img/background.jpg.avif);
+  background-repeat: repeat;
+}
+
+/* || Typography */
+
+#container-title {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* || Containers */
+
+.container {
+  width: 150%;
+  background-color: #fff;
+  margin-left: 4%;
+  border-radius: 5px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 3em;
+  z-index: 1;
+  border-radius: 3em;
+  backdrop-filter: blur(27px);
+  border: solid 2px transparent;
+  background-clip: padding-box;
+  box-shadow: 6px 6px 19px 1px;
+  font-weight: 500;
+}
+
+.container-button {
+  transition: all 0.3s ease;
+  background: #bbcf92;
+  backdrop-filter: blur(40px);
+  background-clip: padding-box;
+  z-index: 0;
+  border-radius: 3em;
+  border: none;
+  padding: 5px;
+  font-weight: 500;
+  color: #004c80;
+}
+
+.container-button:hover {
+  transform: scale(1.2);
+  transform-origin: center;
+  background: #004c80;
+  color: #bbcf92;
+  cursor: pointer;
+}
+
+/* Input Boxes */
+.container .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+
+.input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+  border-color: #9b59b6;
+}
+
+/* Scroll */
+
+body::-webkit-scrollbar {
+  width: 12px;
+  margin-right: 15px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #004c80;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #bbcf92;
+  border-radius: 20px;
+  border: 3px solid #bbcf92;
+}
+
+/* || Media Queries */
+
+/* Container 
+@media (max-width: 725px) {
+  .container {
+    max-width: 100%;
+    margin: 0 20px 0 20px;
+  }
+
+  .container .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+}*/
+

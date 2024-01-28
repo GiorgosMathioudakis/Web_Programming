@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/basicStyle.css">
+    <script src="js/admin.js" defer></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+    
+    <div class="container glass" id="containerall">
+        <div id="container-title">Admin Login</div>
+        <div class="login-in-group">
+            <form id="log-in" onsubmit="adminLogin();return false;">
+                <label id="usernamelabel">Username:</label>
+                <input type="text" id="username" name="username"><br>
+                <label id="passwordlabel">Password:</label>
+                <input type="password" id="password" name="password"><br>
+                <p id="errormessage">Username or Password is incorrect</p>
+                <input type="submit" id="submit" value="LogIn">
+            </form>
+            <form id="go-back" action="index.html">
+                <button class="container-button"><i class="fas fa-arrow-left"></i></button>
+            </form>
+        </div>
+    </div>
+</body>
+    
+</html>

@@ -74,7 +74,7 @@ public class EditPetKeepersTable {
             }
 
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptiondetails! ");
             System.err.println(e.getMessage());
         }
     }
@@ -112,7 +112,7 @@ public class EditPetKeepersTable {
             String json = DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionKeepersUsername! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -129,7 +129,7 @@ public class EditPetKeepersTable {
             String json = DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionKeepersEmail! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -152,7 +152,7 @@ public class EditPetKeepersTable {
 
             return keepers;
         } catch (SQLException e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionAllPetKeepers! ");
             System.err.println(e.getMessage());
             return null;
         } finally {
@@ -193,11 +193,12 @@ public class EditPetKeepersTable {
             }
             return keepers;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exception!AvailableKeeper ");
             System.err.println(e.getMessage());
         }
         return null;
     }
+
     
     
     public ArrayList<PetKeeper> getKeepers(String type) throws SQLException, ClassNotFoundException {
@@ -220,7 +221,7 @@ public class EditPetKeepersTable {
             }
             return keepers;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exceptionGetKeepers! ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -238,7 +239,7 @@ public class EditPetKeepersTable {
             String json=DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+            System.err.println("Got an exception!JsonPetKeepers ");
             System.err.println(e.getMessage());
         }
         return null;
@@ -374,6 +375,47 @@ public class EditPetKeepersTable {
             Logger.getLogger(EditPetKeepersTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public ArrayList<PetKeeper> getPetKeepersTypeAndBookings(String type) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<PetKeeper> keepers = new ArrayList<>();
+
+        try {
+            String query;
+            System.out.println("HELLO" + type);
+            if ("dog".equals(type)) {
+                query = "SELECT pk.* FROM petkeepers pk WHERE pk.dogkeeper = 'true' AND pk.keeper_id NOT IN(SELECT b.keeper_id FROM bookings b WHERE b.status IN ('requested', 'accepted'))";
+            } else if ("cat".equals(type)) {
+                query = "SELECT pk.* FROM petkeepers pk WHERE pk.catkeeper = 'true' AND pk.keeper_id NOT IN (SELECT b.keeper_id FROM bookings b WHERE b.status IN ('requested', 'accepted'))";
+            } else {
+                query = "SELECT * FROM petkeepers"; // Fallback to select all if type is neither dog nor cat
+            }
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            Gson gson = new Gson();
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                PetKeeper keeper = gson.fromJson(json, PetKeeper.class);
+                keepers.add(keeper);
+            }
+
+            return keepers;
+        } catch (SQLException e) {
+            System.err.println("Got an exceptionTypesAndBookings");
+            e.printStackTrace(); // This will print the stack trace to the standard error stream
+            return null;
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
 
    
 
