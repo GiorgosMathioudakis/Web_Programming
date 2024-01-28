@@ -202,21 +202,18 @@
         <url-pattern>/AddBooking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>ReadyReview</servlet-name>
         <url-pattern>/ReadyReview</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddReview</servlet-name>
         <url-pattern>/AddReview</url-pattern>
-=======
         <servlet-name>keeperMessages</servlet-name>
         <url-pattern>/keeperMessages</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>chatGPT</servlet-name>
         <url-pattern>/chatGPT</url-pattern>
->>>>>>> 196d17e62fbe22d2af75302f7426840bd146283c
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -212,7 +212,6 @@ public class EditBookingsTable {
         return null;
     }
 
-<<<<<<< HEAD
     public List<Booking> databaseGetPetOwners(int owner_id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -248,14 +247,11 @@ public class EditBookingsTable {
         return bookings;
     }
 
-    public String getPetType(int owner_id) {
-=======
     public String getPetType(int pet_id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         ResultSet rs;
->>>>>>> 196d17e62fbe22d2af75302f7426840bd146283c
         try {
             rs = stmt.executeQuery("SELECT type FROM pets WHERE pet_id= '" + pet_id + "'");
             System.out.println(rs);
