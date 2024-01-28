@@ -96,11 +96,12 @@
                 
                 <% 
                     String user_rows = "";
-
+                    ArrayList<String> petBreeds = new ArrayList<String>();
 
                     if( bookings == null ) return;
                 for(int i = 0; i < bookings.size(); ++i) {
                     Booking tmp = bookings.get(i);
+                    petBreeds.add((new EditBookingsTable()).getPetBreed(tmp.getPet_id()));
                     user_rows += "<tr>";
                     user_rows += "<td>"+ (new EditBookingsTable()).getPetType(tmp.getPet_id()) +"</td>";
                     user_rows += "<td>"+ tmp.getFromDate()+"</td>";
@@ -123,6 +124,7 @@
                 user_rows = "<div class='card-grid'>";
                     if( bookings == null ) return;
                 int booking_id = 0;
+                String status = "" ; 
                 if( petowners == null ) return;
                 if(keeper == null) return;
                 for(PetOwner petowner : petowners ) {
@@ -130,16 +132,19 @@
                         Booking tmp1 = bookings.get(i);
                         if(tmp1.getOwner_id() == petowner.getOwner_id()){
                             booking_id = tmp1.getBooking_id();
+                            status  = tmp1.getStatus();
                         }
                     }
-                    user_rows += "<div class='container-card'>";
-                    user_rows += "<button owner_id='"+petowner.getOwner_id()+ "' booking_id='"+ booking_id +"' keeper_id='"+keeper.getKeeper_id()+"' class='container-button chat'><i class='fas fa-comment-dots'></i></button>";
-                    user_rows += "<div class='card-top'></div>";
-                    user_rows += "<div class='avatar-holder'><img src='img/"+petowner.getGender()+".svg'></div>";
-                    user_rows += "<div class='name'><text>"+petowner.getFirstname() + " " + petowner.getLastname() +"</text></div>";
-                    user_rows += "<div class='button-card-group'>";
-                    user_rows += "</div>";
-                    user_rows += "</div>";
+                    if(status.equals("accepted")){
+                        user_rows += "<div class='container-card'>";
+                        user_rows += "<button owner_id='"+petowner.getOwner_id()+ "' booking_id='"+ booking_id +"' keeper_id='"+keeper.getKeeper_id()+"' class='container-button chat'><i class='fas fa-comment-dots'></i></button>";
+                        user_rows += "<div class='card-top'></div>";
+                        user_rows += "<div class='avatar-holder'><img src='img/"+petowner.getGender()+".svg'></div>";
+                        user_rows += "<div class='name'><text>"+petowner.getFirstname() + " " + petowner.getLastname() +"</text></div>";
+                        user_rows += "<div class='button-card-group'>";
+                        user_rows += "</div>";
+                        user_rows += "</div>";
+                    }
                 }
                 user_rows += "</div>";
                 out.print(user_rows);
@@ -148,14 +153,24 @@
         </div>
        <div id="chatgpt" class="container glass">
             <div id="container-title">ChatGPT</div>
-            <input type="text" id="userInput" placeholder="Type your question...">
-            <button id="gptbutton" onclick="sendRequest()">Ask</button>
+            <button class="container-button gptbutton" id="careofdog" onclick="sendRequest()" style="width: 250px; height: 30px;">How to take care of a Dog</button>
+            <br>
+            <button class="container-button gptbutton" id="careofcat" onclick="sendRequest()" style="width: 250px; height: 30px;">How to take care of a Cat</button>
+            <br>
+            <%
+            for(String breed: petBreeds){
+               out.println("<button class='container-button gptbutton' onclick='sendRequest()' style='width: 300px; height: 30px;'>Give me some info on breed " + breed + "</button>");
+               out.println("<br>");
+            }
+               
+            %>
             <div id="response"></div>
         </div>
             
         <script>
-            function sendRequest() {
-                var userInput = document.getElementById("userInput").value;
+            function sendRequest(element) {
+                // Use the text content of the button as the prompt
+                var promptText = element.textContent || element.innerText;
 
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "chatGPT", true);
@@ -167,9 +182,8 @@
                     }
                 };
 
-                xhr.send("prompt=" + encodeURIComponent(userInput));
+                xhr.send("prompt=" + encodeURIComponent(promptText));
             }
-
         </script>
 
     

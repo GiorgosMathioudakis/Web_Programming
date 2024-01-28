@@ -33,7 +33,6 @@ public class ownerMessages extends HttpServlet {
             ArrayList<Message> messages = (new EditMessagesTable()).databaseToMessages(Integer.parseInt(booking_id));
             Gson gson = new Gson();
             response.setStatus(200);
-            System.out.println("i apantisi pou dinei i get sta messages");
             System.out.println(gson.toJson(messages));
             response.getWriter().write(gson.toJson(messages));
 
@@ -53,7 +52,7 @@ public class ownerMessages extends HttpServlet {
         log(message);
 
         try {
-            (new EditMessagesTable()).addMessage(booking_id, message, "user");
+            (new EditMessagesTable()).addMessage(booking_id, message, "owner");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ownerMessages.class.getName()).log(Level.SEVERE, null, ex);
         }

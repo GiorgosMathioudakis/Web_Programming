@@ -30,7 +30,7 @@ public class keeperMessages extends HttpServlet {
         String booking_id = request.getParameter("booking_id");
         String message = request.getParameter("message");
         try {
-            (new EditMessagesTable()).addMessage(booking_id, message, "doctor");
+            (new EditMessagesTable()).addMessage(booking_id, message, "keeper");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ownerMessages.class.getName()).log(Level.SEVERE, null, ex);
         }

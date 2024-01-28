@@ -139,10 +139,10 @@ $(".chat").on("click", function () {
 
   xhr.onload = function () {
     if ((xhr.readyState === 4 || xhr.readyState === 200 ) && xhr.status !== 400) {
-        var messages = JSON.parse(xhr.responseText);
-        console.log("prin");
-        console.log(messages);
-        console.log("meta");
+//        var messages = JSON.parse(xhr.responseText);
+//        console.log("prin");
+//        console.log(messages);
+//        console.log("meta");
     }
   };
 
@@ -165,6 +165,8 @@ $(".chat").on("click", function () {
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status !== 400) {
       var messages = JSON.parse(xhr.responseText);
+      console.log(messages);
+      loadMessages(messages);
     }
   };
 
@@ -177,3 +179,10 @@ $(".chat").on("click", function () {
   xhr.send(null);
 });
 
+function loadMessages(messages) {
+  var popup = $("#message-box");
+  
+  for(let i=0; i < messages.length; i++) {
+    popup.append('<p>' + messages[i].sender + ': ' + messages[i].message  + '</p>');
+  }
+}

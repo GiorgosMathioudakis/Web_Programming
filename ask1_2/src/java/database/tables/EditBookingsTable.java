@@ -108,6 +108,7 @@ public class EditBookingsTable {
         return null;
     }
 
+
     public ArrayList<Booking> databaseToBookingArraylist1(int id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -115,6 +116,60 @@ public class EditBookingsTable {
         ResultSet rs;
         try {
             rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id= '" + id + "' AND status != 'rejected'");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Adjust the format as needed
+
+            while (rs.next()) {
+                // Assuming you have a column named 'date' in your 'bookings' table
+                java.sql.Date sqlDate = rs.getDate("fromdate");
+                String fromdateString = (sqlDate != null) ? sdf.format(sqlDate) : null;
+                sqlDate = rs.getDate("todate");
+                String todateString = (sqlDate != null) ? sdf.format(sqlDate) : null;
+
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Booking doc = gson.fromJson(json, Booking.class);
+                // Set the string date in your Booking object
+                if (doc != null) {
+                    doc.setFromDate(fromdateString);
+                    doc.setToDate(todateString);
+                }
+
+                bookings.add(doc);
+
+            }
+            con.close();
+            bookings.sort(
+                    new Comparator<Booking>() {
+                @Override
+                public int compare(Booking r1, Booking r2) {
+                    try {
+                        Date firstdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(r1.getFromDate().replace("T", " ") + ":00");
+                        Date seconddate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(r2.getFromDate().replace("T", " ") + ":00");
+
+                        return firstdate.compareTo(seconddate);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(EditBookingsTable.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return 0;
+                }
+
+            });
+            return bookings;
+        } catch (Exception e) {
+            System.err.println("Exception in databaseToRandevouzArraylist doctor_id: " + id + "! ");
+            System.err.println(e.getMessage());
+        }
+        con.close();
+        return null;
+    }
+
+    public ArrayList<Booking> databaseToBookingArraylist2(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Booking> bookings = new ArrayList<>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE owner_id= '" + id + "' AND status != 'rejected'");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Adjust the format as needed
 
             while (rs.next()) {
@@ -224,6 +279,27 @@ public class EditBookingsTable {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
             String type = jsonObject.get("type").getAsString();
+            return type;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public String getPetBreed(int pet_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT breed FROM pets WHERE pet_id= '" + pet_id + "'");
+            System.out.println(rs);
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
+            String type = jsonObject.get("breed").getAsString();
             return type;
         } catch (Exception e) {
             System.err.println("Got an exception! ");

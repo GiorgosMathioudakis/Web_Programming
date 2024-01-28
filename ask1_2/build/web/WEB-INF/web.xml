@@ -88,7 +88,7 @@
         <servlet-name>petkeeper</servlet-name>
         <servlet-class>servlets.petkeeper</servlet-class>
     </servlet>
-    <servlet>                                       
+    <servlet>
         <servlet-name>ownerMessages</servlet-name>
         <servlet-class>servlets.ownerMessages</servlet-class>
     </servlet>
@@ -124,7 +124,6 @@
         <servlet-name>AvailablePetKeepers</servlet-name>
         <url-pattern>/AvailablePetKeepers</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>DeleteDB</servlet-name>
         <url-pattern>/DeleteDB</url-pattern>
